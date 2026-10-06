@@ -1001,6 +1001,7 @@
       .order-submit { min-height: 58px; }
     }
   </style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOw49PWh5W-VHp3Z83wRO2hpa88ACBoTM&libraries=places"></script>
 </head>
 <body>
   <header class="hero">
@@ -1317,6 +1318,8 @@ function renderCoLines(){var box=$('co-order-lines');box.textContent='';cart.for
 function coFormUrl(){return 'https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform?entry.1870397294='+encodeURIComponent(coOrderText())}
 function coDeliveryMode(){var v=document.querySelector('input[data-delivery-opt]:checked');return v&&v.value.indexOf('deliver')>=0}
 function syncCoFields(){var del=coDeliveryMode();$('co-delivery-fields').hidden=!del;$('co-pickup-fields').hidden=del}
+function initAddressAutocomplete(){if(!window.google||!google.maps||!google.maps.places)return;var input=$('co-address');if(!input||input.dataset.autocompleteInit)return;input.dataset.autocompleteInit='1';var ac=new google.maps.places.Autocomplete(input,{types:['address'],componentRestrictions:{country:'us'}});ac.setFields(['formatted_address']);ac.addListener('place_changed',function(){var place=ac.getPlace();if(place&&place.formatted_address)input.value=place.formatted_address})}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAddressAutocomplete)}else{initAddressAutocomplete()}
 function coValidate(){var ok=true,del=coDeliveryMode();function check(id,test){var f=document.querySelector('.co-field[data-req="'+id+'"]');if(!f)return true;var el=f.querySelector('input,select,textarea');var valid=test(el.value.trim());f.classList.toggle('invalid',!valid);if(!valid)ok=false;return valid}
 check('name',function(v){return v.length>1});check('phone',function(v){return v.replace(/\D/g,'').length>=7});
 if(del){check('address',function(v){return v.length>3})}else{document.querySelectorAll('#co-delivery-fields .co-field.invalid').forEach(function(f){f.classList.remove('invalid')})}
