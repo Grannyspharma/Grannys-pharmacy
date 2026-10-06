@@ -496,6 +496,9 @@
     .co-field.invalid input, .co-field.invalid select { border-color: var(--coral); }
     .co-field.invalid .co-err { display: block; }
     .co-radio-row { display: flex; gap: 10px; }
+    .co-check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .co-check { display: flex; align-items: center; gap: 8px; font-size: .92rem; cursor: pointer; padding: 6px 8px; border: 1px solid var(--line, #ddd); border-radius: 8px; }
+    .co-check input { width: 16px; height: 16px; accent-color: #c9797f; }
     .co-radio { flex: 1; display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); font-size: .92rem; font-weight: 700; cursor: pointer; }
     .co-radio input { width: 18px; height: 18px; accent-color: var(--coral); }
     .co-actions { display: flex; gap: 10px; margin-top: 20px; }
@@ -1202,6 +1205,27 @@
             </div>
           </div>
           <div class="co-field">
+            <label>Occasion/Theme</label>
+            <div class="co-check-grid">
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Birthday"> Birthday</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Baby Shower / Welcome Baby"> Baby Shower / Welcome Baby</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Wedding / Bridal"> Wedding / Bridal</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Anniversary"> Anniversary</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Engagement"> Engagement</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Get Well Soon"> Get Well Soon</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Congratulations"> Congratulations</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Gender Reveal"> Gender Reveal</label>
+              <label class="co-check"><input type="checkbox" name="co-occasion" value="Other"> Other</label>
+            </div>
+          </div>
+          <div class="co-field">
+            <label>Would you like to add anything else to order?</label>
+            <div class="co-check-grid">
+              <label class="co-check"><input type="checkbox" name="co-addon" value="Hi-Float for Latex"> Hi-Float for Latex</label>
+              <label class="co-check"><input type="checkbox" name="co-addon" value="Balloon Weight"> Balloon Weight</label>
+            </div>
+          </div>
+          <div class="co-field">
             <label for="co-notes">Anything else we should know?</label>
             <textarea id="co-notes" placeholder="Colors, theme, message on a balloon…"></textarea>
           </div>
@@ -1313,6 +1337,10 @@ return ok}
 function coPrefillAndGo(){if(!coValidate()){var bad=document.querySelector('#checkout-view .co-field.invalid input, #checkout-view .co-field.invalid select');if(bad)bad.focus();return}
 var del=coDeliveryMode(),phone=$('co-phone').value.trim();
 var orderText=coOrderText(),notes=$('co-notes').value.trim();
+var occasions=[];document.querySelectorAll('input[name="co-occasion"]:checked').forEach(function(c){occasions.push(c.value)});
+var addons=[];document.querySelectorAll('input[name="co-addon"]:checked').forEach(function(c){addons.push(c.value)});
+if(occasions.length)orderText+='\nOccasion/Theme: '+occasions.join(', ');
+if(addons.length)orderText+='\nAdd-ons: '+addons.join(', ');
 if(notes)orderText+='\nNotes: '+notes;
 var params={'entry.1870397294':orderText,'entry.1240966703':$('co-name').value.trim(),'entry.1447863888':phone,'entry.395943657':document.querySelector('input[data-delivery-opt]:checked').value};
 if(del){var addr=$('co-address').value.trim(),town=$('co-town').value;params['entry.1174725512']=town?addr+', '+town:addr;var dd=$('co-delivery-date').value;if(dd)params['entry.275909592']=dd;var tw=document.querySelector('input[name="co-timewin"]:checked');if(tw)params['entry.161086230']=tw.value}else{var pd=$('co-pickup-date').value;if(pd)params['entry.275909592']=pd}
