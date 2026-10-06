@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#171036" />
+  <link rel="icon" href="data:," />
+  <title>Granny's Pharmacy Balloon Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Paytone+One&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: #fffaf4;
+      --surface: #ffffff;
+      --surface-2: #f6f1e8;
+      --ink: #183b3b;
+      --muted: #566968;
+      --line: #ded7cb;
+      --coral: #d94b38;
+      --coral-deep: #b93628;
+      --teal: #087d7b;
+      --teal-soft: #d9f1ec;
+      --yellow: #f3bd37;
+      --yellow-soft: #fff0bd;
+      --blue-soft: #dfeff2;
+      --rose-soft: #fbe0db;
+      --image-tint: #fff0f2;
+      --shadow: 0 20px 50px rgba(42, 50, 44, .11);
+      --display: "Paytone One", "Trebuchet MS", sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #102726;
+        --surface: #173432;
+        --surface-2: #203d3a;
+        --ink: #fff9ee;
+        --muted: #bdd0cc;
+        --line: #385653;
+        --coral: #ff725c;
+        --coral-deep: #ff927f;
+        --teal: #6ed4ca;
+        --teal-soft: #174541;
+        --yellow: #f6ca54;
+        --yellow-soft: #4b411f;
+        --blue-soft: #1c454b;
+        --rose-soft: #512f2b;
+        --image-tint: #f8e6ea;
+        --shadow: 0 24px 60px rgba(0, 0, 0, .26);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 640px;
+      overflow: hidden;
+      background: #dcecf0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, rgba(234,244,246,.98) 0%, rgba(234,244,246,.9) 42%, rgba(234,244,246,.1) 68%, rgba(234,244,246,0) 100%);
+    }
+    .hero-art {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-inner {
+      min-height: 640px;
+      display: grid;
+      align-content: center;
+      padding: 72px 0 86px;
+    }
+    .brandline {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      color: #0d5554;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .brandline svg { width: 25px; height: 25px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 18px;
+      max-width: 600px;
+      font-family: var(--display);
+      font-size: clamp(3rem, 7.5vw, 6.7rem);
+      line-height: .95;
+      letter-spacing: -.045em;
+      color: #123f40;
+    }
+    .hero-copy {
+      max-width: 540px;
+      margin-bottom: 30px;
+      color: #2f5757;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-weight: 600;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 21px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      background: var(--coral);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 8px 0 #9c2d24;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+    .button:hover { transform: translateY(2px); box-shadow: 0 6px 0 #9c2d24; background: #c94333; }
+    .button:active { transform: translateY(6px); box-shadow: 0 2px 0 #9c2d24; }
+    .button.secondary {
+      background: rgba(255,255,255,.72);
+      color: #174d4c;
+      border-color: #174d4c;
+      box-shadow: none;
+      backdrop-filter: blur(6px);
+    }
+    .button.secondary:hover { background: #fff; transform: translateY(-1px); box-shadow: none; }
+    .icon { width: 19px; height: 19px; flex: 0 0 auto; }
+    .location {
+      margin: 24px 0 0;
+      color: #315b5b;
+      font-size: .96rem;
+      font-weight: 600;
+    }
+
+    .occasion-strip {
+      position: relative;
+      z-index: 2;
+      margin-top: -31px;
+    }
+    .occasion-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 19px 22px;
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .occasion-label {
+      flex: 0 0 auto;
+      padding-right: 12px;
+      font-weight: 800;
+      color: var(--teal);
+    }
+    .occasions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .occasion {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--ink);
+      font-size: .91rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .occasion:nth-child(3n+1) { background: var(--yellow-soft); }
+    .occasion:nth-child(3n+2) { background: var(--teal-soft); }
+    .occasion:nth-child(3n) { background: var(--rose-soft); }
+
+    section { padding: 96px 0; }
+    .section-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 42px; }
+    .eyebrow { margin-bottom: 10px; color: var(--coral); font-weight: 800; }
+    h2 {
+      margin-bottom: 0;
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -.03em;
+    }
+    .section-intro { margin: 0; color: var(--muted); font-size: 1.07rem; }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .price-card {
+      grid-column: span 4;
+      display: flex;
+      min-height: 210px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 18px 18px 18px 4px;
+      background: var(--surface);
+    }
+    .price-card.feature { grid-column: span 6; min-height: 230px; }
+    .price-card.teal { background: var(--teal-soft); border-color: transparent; }
+    .price-card.yellow { background: var(--yellow-soft); border-color: transparent; }
+    .price-card.rose { background: var(--rose-soft); border-color: transparent; }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .card-no {
+      color: var(--teal);
+      font-family: var(--display);
+      font-size: .9rem;
+      letter-spacing: .04em;
+    }
+    .card-symbol { width: 39px; height: 39px; color: var(--coral); }
+    .price-card h3 { margin: 26px 0 6px; font-size: 1.18rem; line-height: 1.25; }
+    .price {
+      margin: 0;
+      color: var(--coral);
+      font-family: var(--display);
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      line-height: 1;
+    }
+    .price small { font-family: var(--body); font-size: .7rem; font-weight: 700; }
+    .desc { margin: 8px 0 0; color: var(--muted); font-size: .93rem; }
+    .catalog-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 28px;
+      padding: 24px 26px;
+      border-radius: 6px 20px 20px 20px;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .catalog-cta p { margin: 0; font-weight: 700; }
+    .catalog-cta .button { flex: 0 0 auto; }
+
+    .order-section { padding-top: 20px; }
+    .order-panel {
+      overflow: hidden;
+      border-radius: 28px 6px 28px 6px;
+      background: var(--teal);
+      color: #fff;
+    }
+    .order-head { padding: 50px 48px 28px; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
+    .order-head h2 { color: #fff; }
+    .order-head p { max-width: 420px; margin: 0; color: rgba(255,255,255,.85); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.25); }
+    .step { padding: 34px 34px 40px; }
+    .step + .step { border-left: 1px solid rgba(255,255,255,.25); }
+    .step-num { display: block; margin-bottom: 25px; color: #ffe186; font-family: var(--display); font-size: 2.5rem; line-height: 1; }
+    .step h3 { font-size: 1.25rem; margin-bottom: 9px; }
+    .step p { margin-bottom: 22px; color: rgba(255,255,255,.8); }
+    .step-link { color: #fff; font-weight: 800; text-underline-offset: 4px; }
+    .order-panel .button { background: #fff; color: #a73125; box-shadow: 0 7px 0 #8f3127; }
+    .order-panel .button:hover { background: #fff7ef; }
+
+    .delivery {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+    .delivery-card {
+      padding: 42px;
+      border-radius: 8px 26px 26px 26px;
+      background: var(--yellow);
+      color: #223d3a;
+    }
+    .delivery-card h2 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+    .delivery-card .big { margin: 26px 0 8px; font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; }
+    .delivery-card p:last-child { margin-bottom: 0; font-weight: 700; }
+    .delivery-details {
+      display: grid;
+      align-content: center;
+      gap: 16px;
+      padding: 32px 8px 32px 20px;
+    }
+    .detail-row { display: grid; grid-template-columns: 50px 1fr; gap: 18px; align-items: start; padding: 7px 0 21px; border-bottom: 1px solid var(--line); }
+    .detail-row:last-child { border-bottom: 0; }
+    .detail-icon { width: 46px; height: 46px; padding: 10px; border-radius: 50%; background: var(--teal-soft); color: var(--teal); }
+    .detail-row h3 { margin: 0 0 4px; font-size: 1.08rem; }
+    .detail-row p { margin: 0; color: var(--muted); }
+
+    footer { padding: 0 0 calc(100px + env(safe-area-inset-bottom)); }
+    .footer-inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+    .fineprint { color: var(--muted); font-size: .88rem; }
+    .fineprint p { margin-bottom: 8px; }
+    .hours { display: grid; grid-template-columns: 1fr auto; gap: 7px 20px; align-content: start; font-size: .91rem; }
+    .hours strong { grid-column: 1/-1; margin-bottom: 4px; color: var(--ink); }
+    .closed { color: var(--coral); font-weight: 700; }
+    .footer-cta { margin-top: 20px; }
+    .mobile-cta { display: none; }
+
+    .catalog-tools { position: sticky; top: 0; z-index: 10; margin: 0 0 24px; padding: 14px; background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .mobile-search-row { display: block; }
+    .catalog-search { width: 100%; min-height: 48px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font: inherit; }
+    .filter-toggle { display: none; }
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+    .filter-chip { min-height: 36px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: 700 .84rem var(--body); cursor: pointer; }
+    .filter-chip.active { border-color: var(--teal); background: var(--teal); color: #fff; }
+    .catalog-meta { display:flex; justify-content:flex-end; gap:20px; margin: 0 0 16px; color:var(--muted); font-weight:700; }
+    .product-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .product-card { display:flex; min-width:0; flex-direction:column; overflow:hidden; border:1px solid var(--line); border-radius:16px 16px 16px 4px; background:var(--surface); }
+    .product-card[hidden] { display:none; }
+    .product-visual { position:relative; background:var(--image-tint); }
+    .product-image { width:100%; aspect-ratio:1/1; object-fit:contain; background:var(--image-tint); mix-blend-mode:multiply; }
+    .product-image.is-changing { opacity:.3; }
+    .product-image-note { position:absolute; right:9px; bottom:9px; left:9px; margin:0; padding:6px 9px; border-radius:7px; background:rgba(23,16,54,.88); color:#fff; font-size:.72rem; font-weight:800; line-height:1.25; text-align:center; }
+    .product-image-empty { display:grid; place-items:center; padding:24px; background:var(--teal-soft); color:var(--teal); text-align:center; font-weight:800; }
+    .product-body { display:flex; flex:1; flex-direction:column; padding:16px; }
+    .product-category { color:var(--teal); font-size:.78rem; font-weight:800; }
+    .product-card h3 { margin:6px 0 8px; font-size:1rem; line-height:1.28; }
+    .product-sku { margin:0 0 12px; color:var(--muted); font-size:.78rem; }
+    .product-price { margin-top:auto; color:var(--coral); font-family:var(--display); font-size:1.42rem; }
+    .product-price.on-sale { display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 8px; }
+    .product-price .sale-label { align-self:center; padding:3px 7px; border-radius:5px; background:var(--coral); color:#fff; font:800 .65rem var(--body); letter-spacing:.04em; line-height:1.3; text-transform:uppercase; text-shadow:none; }
+    .product-price del { color:var(--muted); font:800 .9rem var(--body); text-decoration-thickness:2px; text-shadow:none; }
+    .product-price .sale-price { color:inherit; }
+    .product-price.on-sale small { width:100%; }
+    .product-price small { color:var(--muted); font:600 .76rem var(--body); }
+    .option-field { display:grid; gap:4px; margin-top:9px; }
+    .option-field label { font-size:.78rem; font-weight:800; }
+    .option-field select { width:100%; min-height:40px; padding:7px 8px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); font:inherit; font-size:.84rem; }
+    .no-results { padding:36px; text-align:center; border:1px solid var(--line); border-radius:14px; background:var(--surface); color:var(--muted); }
+    .add-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+    }
+    .add-button, .qty-button, .cart-trigger, .cart-close, .remove-button {
+      font: inherit;
+      cursor: pointer;
+    }
+    .add-button {
+      min-height: 42px;
+      padding: 9px 16px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 800;
+    }
+    .add-button:hover { background: var(--teal); color: #fff; }
+    .qty-control { display: inline-flex; align-items: center; gap: 6px; }
+    .qty-button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+    .qty-value { min-width: 26px; text-align: center; font-weight: 800; }
+    .cart-trigger {
+      position: fixed;
+      right: 22px;
+      bottom: calc(22px + env(safe-area-inset-bottom));
+      z-index: 30;
+      display: inline-flex;
+      min-height: 54px;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(75,25,18,.32);
+      font-weight: 800;
+    }
+    .cart-count {
+      display: grid;
+      min-width: 26px;
+      height: 26px;
+      place-items: center;
+      padding: 0 7px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--coral-deep);
+      font-size: .84rem;
+    }
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      background: rgba(4, 23, 23, .6);
+    }
+    .cart-overlay.open { display: block; }
+    .cart-drawer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(520px, 100%);
+      height: 100%;
+      overflow-y: auto;
+      padding: 28px 28px calc(34px + env(safe-area-inset-bottom));
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: -18px 0 50px rgba(0,0,0,.2);
+    }
+    .cart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+    .cart-head h2 { font-size: clamp(2rem, 7vw, 3rem); }
+    .cart-head p { margin: 8px 0 0; color: var(--muted); }
+    .cart-close {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface-2);
+      color: var(--ink);
+      font-size: 1.65rem;
+      line-height: 1;
+    }
+    .cart-empty { margin: 34px 0; padding: 24px; border-radius: 12px; background: var(--surface-2); color: var(--muted); }
+    .cart-list { display: grid; gap: 12px; margin: 26px 0 18px; }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .cart-item strong { line-height: 1.3; }
+    .cart-item-price { color: var(--muted); font-size: .9rem; }
+    .remove-button { padding: 0; border: 0; background: transparent; color: var(--coral); font-weight: 700; }
+    .cart-summary { display: flex; justify-content: space-between; gap: 20px; margin: 18px 0 26px; font-size: 1.12rem; }
+    .cart-summary strong { font-family: var(--display); font-size: 1.42rem; }
+    .quote-note { margin: -14px 0 24px; color: var(--muted); font-size: .86rem; }
+    .order-submit {
+      display: inline-flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 10px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 7px 0 #9c2d24;
+      font: 800 1rem var(--body);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cart-call { width: 100%; margin-top: 26px; }
+    body.cart-open { overflow: hidden; }
+
+    @media (max-width: 860px) {
+      .hero { min-height: 650px; }
+      .hero-inner { min-height: 650px; align-content: end; padding-bottom: 72px; }
+      .hero::after { background: linear-gradient(0deg, rgba(234,244,246,.99) 0%, rgba(234,244,246,.93) 50%, rgba(234,244,246,.03) 82%); }
+      .hero-art { object-position: 68% center; }
+      h1 { max-width: 590px; font-size: clamp(3.15rem, 12vw, 5.5rem); }
+      .occasion-box { align-items: flex-start; flex-direction: column; }
+      .section-heading { grid-template-columns: 1fr; gap: 18px; }
+      .price-card { grid-column: span 6; }
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .price-card.feature { grid-column: span 6; }
+      .order-head { align-items: flex-start; flex-direction: column; }
+      .steps { grid-template-columns: 1fr; }
+      .step + .step { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); }
+      .delivery { grid-template-columns: 1fr; }
+      .delivery-details { padding: 10px 10px 0; }
+    }
+    @media (max-width: 570px) {
+      .wrap { width: min(100% - 28px, 1160px); }
+      .hero { min-height: 690px; }
+      .hero-inner { min-height: 690px; padding: 44px 0 62px; }
+      .hero-art { height: 52%; object-position: 71% 30%; }
+      .hero::after { background: linear-gradient(0deg, rgba(234,244,246,1) 0%, rgba(234,244,246,.99) 56%, rgba(234,244,246,.22) 79%, rgba(234,244,246,0) 100%); }
+      h1 { font-size: clamp(3rem, 15.5vw, 4.55rem); }
+      .hero-copy { font-size: 1.02rem; }
+      .hero-actions .button { width: 100%; }
+      .location { font-size: .88rem; }
+      .occasion-strip { margin-top: -22px; }
+      .occasion-box { padding: 17px; border-radius: 13px; }
+      section { padding: 74px 0; }
+      .price-grid { gap: 12px; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap:10px; }
+      .product-body { padding:12px; }
+      .product-card h3 { font-size:.9rem; }
+      .product-price { font-size:1.18rem; }
+      .catalog-tools { position:static; margin-left:-14px; margin-right:-14px; padding:12px 14px; }
+      .catalog-meta { font-size:.88rem; }
+      .price-card, .price-card.feature { grid-column: 1 / -1; min-height: 178px; padding: 21px; }
+      .price-card h3 { margin-top: 20px; }
+      .catalog-cta { align-items: stretch; flex-direction: column; }
+      .catalog-cta .button { width: 100%; }
+      .order-panel { border-radius: 20px 4px 20px 4px; }
+      .order-head { padding: 38px 25px 25px; }
+      .step { padding: 29px 25px 33px; }
+      .delivery-card { padding: 32px 25px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .cart-trigger { right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); left: 12px; justify-content: center; }
+      .cart-drawer { padding: 22px 18px calc(28px + env(safe-area-inset-bottom)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+
+    /* Vibrant party-poster theme */
+    :root {
+      --paper: #171036;
+      --surface: #25184d;
+      --surface-2: #33235f;
+      --ink: #ffffff;
+      --muted: #d8d1ed;
+      --line: #5a438b;
+      --coral: #ff2f93;
+      --coral-deep: #d90a6d;
+      --teal: #3de4d2;
+      --teal-soft: #173e59;
+      --yellow: #ffd928;
+      --yellow-soft: #503f14;
+      --blue-soft: #193d74;
+      --rose-soft: #56204c;
+      --shadow: 0 18px 0 rgba(7, 4, 27, .42), 0 25px 55px rgba(3, 1, 18, .36);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 9% 14%, rgba(255, 47, 147, .13) 0 2px, transparent 3px),
+        radial-gradient(circle at 91% 29%, rgba(255, 217, 40, .16) 0 2px, transparent 3px),
+        radial-gradient(circle at 22% 73%, rgba(61, 228, 210, .12) 0 2px, transparent 3px),
+        var(--paper);
+      background-size: 76px 76px, 92px 92px, 108px 108px, auto;
+    }
+
+    .hero {
+      min-height: 680px;
+      background: #171036;
+      border-bottom: 10px solid var(--yellow);
+    }
+    .hero::after {
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(23, 16, 54, .99) 0%, rgba(23, 16, 54, .96) 43%, rgba(23, 16, 54, .58) 67%, rgba(23, 16, 54, .18) 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: -42px;
+      bottom: 36px;
+      width: 126px;
+      height: 154px;
+      border-radius: 52% 48% 48% 52% / 46% 46% 54% 54%;
+      background:
+        radial-gradient(circle at 31% 23%, rgba(255,255,255,.92) 0 7%, rgba(255,255,255,.28) 8% 13%, transparent 14%),
+        linear-gradient(145deg, #ff6b17 0 34%, #ef1f27 70%);
+      box-shadow:
+        92px -470px 0 -26px #ff2f93,
+        128px -418px 0 -35px #ffd928,
+        calc(100vw - 12px) -390px 0 -22px #8e56ff,
+        calc(100vw - 102px) -500px 0 -34px #24c8ef,
+        calc(100vw - 34px) -60px 0 -28px #21bf73;
+      filter: drop-shadow(0 12px 13px rgba(0,0,0,.28));
+      opacity: .98;
+      pointer-events: none;
+    }
+    .hero-art {
+      opacity: .78;
+      filter: saturate(1.35) contrast(1.06);
+      object-position: 68% center;
+    }
+    .hero-inner { min-height: 680px; position: relative; z-index: 2; }
+    .hero-inner::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: -28px;
+      top: 50%;
+      width: min(730px, calc(100% + 28px));
+      height: min(560px, calc(100% - 84px));
+      transform: translateY(-50%);
+      border: 2px solid rgba(255,255,255,.18);
+      border-radius: 24px 24px 24px 7px;
+      background: linear-gradient(90deg, rgba(23,16,54,.94), rgba(23,16,54,.78));
+      box-shadow: 0 14px 34px rgba(0,0,0,.2);
+    }
+    .brandline {
+      color: #fff;
+      font-family: var(--display);
+      font-size: 1.08rem;
+      text-shadow: 0 2px 0 rgba(0,0,0,.35);
+    }
+    h1 {
+      max-width: 700px;
+      color: #fff;
+      font-size: clamp(3.5rem, 8.4vw, 7.5rem);
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      -webkit-text-stroke: 2px #171036;
+      paint-order: stroke fill;
+      text-shadow: 5px 6px 0 #ff2f93, 10px 12px 0 rgba(0,0,0,.45);
+    }
+    .hero-copy,
+    .location { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.72); }
+    .hero-copy { max-width: 600px; font-size: clamp(1.1rem, 2vw, 1.38rem); }
+
+    .button {
+      border-color: #fff;
+      border-radius: 14px 14px 14px 4px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 8px 0 #99084d;
+      font-family: var(--display);
+      letter-spacing: .01em;
+    }
+    .button:hover { background: #ff4da4; box-shadow: 0 6px 0 #99084d; }
+    .button.secondary {
+      background: var(--yellow);
+      color: #211743;
+      border-color: #fff;
+      box-shadow: 0 8px 0 #a77600;
+      backdrop-filter: none;
+    }
+    .button.secondary:hover { background: #ffe66b; box-shadow: 0 6px 0 #a77600; }
+
+    .occasion-strip { margin-top: -37px; }
+    .occasion-box {
+      border: 3px solid #fff;
+      border-radius: 18px 18px 18px 5px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 10px 0 #9d074f, 0 22px 42px rgba(0,0,0,.3);
+    }
+    .occasion-label { color: var(--yellow); font-family: var(--display); font-size: 1.05rem; }
+    .occasion {
+      border: 2px solid rgba(255,255,255,.72);
+      background: #35205f;
+      color: #fff;
+      box-shadow: 0 3px 0 rgba(0,0,0,.25);
+    }
+    .occasion:nth-child(3n+1) { background: #ec262f; }
+    .occasion:nth-child(3n+2) { background: #168fce; }
+    .occasion:nth-child(3n) { background: #6e36bd; }
+
+    section { position: relative; }
+    .section-heading { position: relative; padding-right: 106px; }
+    .section-heading::after {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: 8px;
+      width: 66px;
+      height: 82px;
+      border-radius: 51% 49% 48% 52% / 44% 44% 56% 56%;
+      background:
+        radial-gradient(circle at 31% 24%, rgba(255,255,255,.9) 0 8%, rgba(255,255,255,.25) 9% 15%, transparent 16%),
+        linear-gradient(145deg, #ff4550, #b80d6a);
+      box-shadow: -54px 28px 0 -10px #ffd928, 40px 38px 0 -13px #24c8ef;
+      filter: drop-shadow(0 9px 7px rgba(0,0,0,.3));
+      transform: rotate(8deg);
+      pointer-events: none;
+    }
+    .section-heading > * { position: relative; z-index: 1; }
+    .section-heading::after,
+    .section-heading::before { z-index: 0; }
+    .section-heading::before {
+      content: "";
+      position: absolute;
+      right: 37px;
+      top: 70px;
+      width: 2px;
+      height: 44px;
+      background: #fff;
+      transform: rotate(-12deg);
+      opacity: .75;
+    }
+    .eyebrow { color: var(--yellow); font-family: var(--display); font-size: 1.02rem; }
+    h2 { color: #fff; }
+    .section-intro { color: var(--muted); }
+
+    .catalog-tools {
+      top: 0;
+      border: 2px solid #6f55a3;
+      border-radius: 17px 17px 17px 5px;
+      background: rgba(23, 16, 54, .95);
+      box-shadow: 0 8px 0 rgba(5,2,24,.5);
+    }
+    .catalog-search {
+      border: 2px solid #fff;
+      border-radius: 12px;
+      background: #fff;
+      color: #20163f;
+      box-shadow: inset 0 2px 0 rgba(35,18,80,.12);
+    }
+    .catalog-search::placeholder { color: #5e5573; }
+    .filter-chip {
+      border: 2px solid #846db5;
+      background: #33235f;
+      color: #fff;
+      box-shadow: 0 3px 0 rgba(0,0,0,.28);
+    }
+    .filter-chip:hover { border-color: var(--yellow); }
+    .filter-chip.active {
+      border-color: #fff;
+      background: var(--yellow);
+      color: #24173f;
+      box-shadow: 0 4px 0 #a87400;
+    }
+    .catalog-meta { color: #e8e2f8; }
+
+    .product-grid { gap: 20px; }
+    .product-card {
+      border: 2px solid #60478f;
+      border-radius: 20px 20px 20px 5px;
+      background: #271950;
+      box-shadow: 0 9px 0 #0d0823, 0 15px 26px rgba(0,0,0,.22);
+    }
+    .product-card:nth-child(4n+1) { border-color: #ff437c; }
+    .product-card:nth-child(4n+2) { border-color: #f5b928; }
+    .product-card:nth-child(4n+3) { border-color: #28c9c2; }
+    .product-card:nth-child(4n) { border-color: #8f68e9; }
+    .product-image { background: var(--image-tint); border-bottom: 4px solid var(--yellow); }
+    .product-image-empty { background: #173e59; color: var(--yellow); }
+    .product-category {
+      width: fit-content;
+      padding: 4px 8px;
+      border-radius: 7px;
+      background: var(--coral);
+      color: #fff;
+      font-family: var(--display);
+      font-size: .72rem;
+    }
+    .product-card h3 { color: #fff; }
+    .product-sku { color: #beb4dc; }
+    .product-price { color: var(--yellow); text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+    .product-price small { color: #fff; }
+    .option-field label { color: #fff; }
+    .option-field select {
+      border: 2px solid #765ba7;
+      background: #1d123f;
+      color: #fff;
+    }
+    .add-control { border-top-color: #624d91; }
+    .add-button {
+      border: 2px solid #fff;
+      border-radius: 11px 11px 11px 3px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 5px 0 #99084d;
+      font-family: var(--display);
+    }
+    .add-button:hover { background: var(--yellow); color: #21143c; }
+    .no-results { border: 2px solid #6d529d; background: var(--surface); color: var(--muted); }
+
+    .catalog-cta {
+      border: 3px solid #fff;
+      border-radius: 8px 22px 22px 22px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 9px 0 #98064b;
+    }
+    .catalog-cta p { font-size: 1.05rem; }
+
+    .order-panel {
+      border: 3px solid #fff;
+      background: #3a2170;
+      box-shadow: 0 12px 0 #0a061d;
+    }
+    .order-head {
+      position: relative;
+      background: #6c36bc;
+    }
+    .order-head::after {
+      content: "";
+      position: absolute;
+      right: 32px;
+      top: 24px;
+      width: 55px;
+      height: 68px;
+      border-radius: 50% 50% 46% 54%;
+      background: radial-gradient(circle at 30% 23%, #fff 0 7%, rgba(255,255,255,.25) 8% 15%, transparent 16%), linear-gradient(145deg,#24c8ef,#1169d4);
+      box-shadow: -62px 17px 0 -12px #ff4458;
+      opacity: .9;
+    }
+    .order-head > * { position: relative; z-index: 1; }
+    .order-head p,
+    .step p { color: #eee9fb; }
+    .step-num { color: var(--yellow); text-shadow: 3px 3px 0 #ff2f93; }
+    .order-panel .button { background: var(--yellow); color: #271443; box-shadow: 0 7px 0 #a66f00; }
+    .order-panel .button:hover { background: #ffe565; }
+
+    .delivery-card {
+      position: relative;
+      overflow: hidden;
+      border: 4px solid #fff;
+      border-radius: 12px 30px 30px 30px;
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 11px 0 #99084d;
+    }
+    .delivery-card > * { position: relative; z-index: 1; }
+    .delivery-card::after {
+      content: "";
+      position: absolute;
+      right: -22px;
+      bottom: -20px;
+      width: 112px;
+      height: 136px;
+      border-radius: 50% 50% 47% 53%;
+      background: radial-gradient(circle at 30% 22%, rgba(255,255,255,.95) 0 7%, rgba(255,255,255,.25) 8% 14%, transparent 15%), linear-gradient(145deg,#ffd928,#f39a15);
+      transform: rotate(14deg);
+      opacity: .92;
+    }
+    .delivery-card .eyebrow { color: #fff; }
+    .delivery-card h2 { color: var(--yellow); text-shadow: 3px 3px 0 #7d0640; }
+    .delivery-card .big { color: var(--yellow); text-shadow: 3px 3px 0 #7d0640; }
+    .detail-row { border-bottom-color: #5f478e; }
+    .detail-icon { background: #33235f; color: var(--yellow); }
+    .detail-row p { color: var(--muted); }
+
+    footer { color: #fff; }
+    .footer-inner { border-top: 2px solid #5f478e; }
+    .fineprint { color: #cfc6e6; }
+    .hours strong { color: var(--yellow); font-family: var(--display); }
+    .closed { color: #ff71b5; }
+
+    .cart-trigger {
+      border: 3px solid #fff;
+      border-radius: 16px 16px 16px 5px;
+      background: var(--coral);
+      box-shadow: 0 8px 0 #8e0647, 0 16px 28px rgba(0,0,0,.38);
+      font-family: var(--display);
+    }
+    .cart-count { background: var(--yellow); color: #251541; }
+    .cart-overlay { background: rgba(5, 2, 24, .78); }
+    .cart-drawer { background: #211644; color: #fff; box-shadow: -18px 0 50px rgba(0,0,0,.5); }
+    .cart-close { border: 2px solid #7660a5; background: #33235f; color: #fff; }
+    .cart-empty { background: #33235f; color: #ddd5ee; }
+    .cart-item { border-bottom-color: #5b4785; }
+    .cart-item-price { color: #c9c0e0; }
+    .qty-button { border: 2px solid #765ca6; background: #33235f; color: #fff; }
+    .remove-button { color: #ff73b8; }
+    .cart-summary strong { color: var(--yellow); }
+    .quote-note { color: #cfc6e4; }
+    .order-submit { border: 2px solid #fff; background: var(--coral); box-shadow: 0 7px 0 #900646; }
+
+    @media (max-width: 860px) {
+      .hero::after { background: linear-gradient(0deg, rgba(23,16,54,.99) 0%, rgba(23,16,54,.96) 52%, rgba(23,16,54,.38) 76%, rgba(23,16,54,.08) 100%); }
+      .hero-art { object-position: 70% center; }
+      .section-heading { padding-right: 116px; }
+    }
+    @media (max-width: 570px) {
+      .hero { min-height: 730px; }
+      .hero-inner { min-height: 730px; }
+      .hero-inner::after { left: -14px; top: auto; bottom: 28px; width: calc(100% + 28px); height: 430px; transform: none; border-radius: 18px 18px 18px 5px; background: rgba(23,16,54,.95); }
+      .hero-art { height: 55%; object-position: 69% 28%; }
+      .hero::after { background: linear-gradient(0deg, #171036 0%, rgba(23,16,54,.99) 59%, rgba(23,16,54,.3) 82%, rgba(23,16,54,.05) 100%); }
+      h1 { font-size: clamp(3rem, 16.5vw, 4.8rem); -webkit-text-stroke-width: 1.4px; text-shadow: 3px 4px 0 #ff2f93, 7px 8px 0 rgba(0,0,0,.38); }
+      .section-heading { padding-right: 0; padding-top: 72px; }
+      .section-heading::after { left: 4px; right: auto; top: -5px; transform: scale(.78) rotate(8deg); transform-origin: left top; }
+      .section-heading::before { display: none; }
+      .catalog-tools { border-left: 0; border-right: 0; border-radius: 0; }
+      .product-card { border-radius: 14px 14px 14px 4px; }
+      .occasion-box { border-radius: 14px 14px 14px 4px; }
+      .order-head::after { opacity: .46; }
+      .delivery-card::after { opacity: .34; }
+    }
+
+    /* Phone-only catalog and cart refinements; desktop layout remains unchanged. */
+    @media (max-width: 680px) {
+      #catalog { overflow: visible; }
+      .catalog-tools {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        margin-bottom: 18px;
+        padding-top: max(12px, env(safe-area-inset-top));
+      }
+      .mobile-search-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+        align-items: center;
+      }
+      .catalog-search {
+        min-width: 0;
+        min-height: 50px;
+        padding: 12px 13px;
+        font-size: 16px;
+      }
+      .filter-toggle {
+        display: inline-flex;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 12px;
+        border: 2px solid var(--yellow);
+        border-radius: 11px 11px 11px 3px;
+        background: #33235f;
+        color: var(--yellow);
+        box-shadow: 0 4px 0 rgba(0,0,0,.32);
+        font: 800 .82rem var(--body);
+        cursor: pointer;
+      }
+      .filter-toggle[aria-expanded="true"] { background: var(--yellow); color: #24173f; }
+      .filter-chips { display: none; max-height: 38vh; overflow-y: auto; padding-bottom: 3px; }
+      .filter-chips.open { display: flex; }
+      .filter-chip { min-height: 44px; padding: 9px 13px; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .product-body { padding: 12px; }
+      .product-card h3 { font-size: .92rem; line-height: 1.3; }
+      .product-price { font-size: 1.2rem; }
+      .product-price .sale-label { font-size: .61rem; }
+      .product-price del { font-size: .82rem; }
+      .option-field select { min-height: 48px; padding: 9px 8px; font-size: 16px; }
+      .add-control { margin-top: 16px; padding-top: 14px; }
+      .add-button { width: 100%; min-height: 48px; padding: 10px 8px; font-size: .9rem; }
+      .cart-trigger {
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        left: 12px;
+        min-height: 60px;
+        justify-content: center;
+        padding: 13px 18px;
+        font-size: 1rem;
+      }
+      .cart-drawer {
+        width: 100%;
+        height: 100dvh;
+        padding: max(18px, env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
+        overscroll-behavior: contain;
+      }
+      .cart-head { gap: 12px; }
+      .cart-head h2 { font-size: clamp(1.85rem, 9vw, 2.5rem); line-height: 1.02; }
+      .cart-head p { font-size: .92rem; }
+      .cart-close { width: 48px; height: 48px; }
+      .cart-item { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; }
+      .cart-item .remove-button { grid-column: 1 / -1; min-height: 44px; width: fit-content; padding: 8px 0; }
+      .qty-button { width: 44px; height: 44px; }
+      .order-submit { min-height: 58px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <img class="hero-art" src="images/balloon-001.jpg" alt="Colorful balloon bouquet with metallic stars and a giant number balloon" />
+    <div class="wrap hero-inner">
+      <div class="brandline">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21V9m0 0c-3.6 0-6.5-2-6.5-4.5S8.4 1 12 1s6.5 1 6.5 3.5S15.6 9 12 9Zm0 0c-2.8 0-4.6 1.6-4.6 3.4 0 1.5 1.2 2.6 2.7 2.6H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Granny's Pharmacy
+      </div>
+      <h1>Balloons for every big moment.</h1>
+      <p class="hero-copy">Brighten birthdays, showers, milestones, and ordinary days with balloons ready to give, display, or deliver.</p>
+      <div class="hero-actions">
+        <a class="button" href="#catalog">Browse balloons
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="button secondary" href="tel:+15169605201" aria-label="Call Granny's Pharmacy at (516) 960-5201">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.8 3.8 6.7 2.4c-.8-.5-1.8-.3-2.3.4C1.2 7.3 5.9 17.8 13.8 21c.9.4 1.9 0 2.3-.8l1.1-2.3c.4-.8.1-1.7-.6-2.2l-2.5-1.5c-.7-.4-1.5-.3-2 .3l-1 1.1c-2.2-1.1-3.6-2.7-4.3-4.7L8.4 9c.6-.7.7-1.6.4-2.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          (516) 960-5201
+        </a>
+      </div>
+      <p class="location">5624 Merrick Road, Massapequa, NY 11758 · Directly across from Lidl</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="catalog" aria-labelledby="price-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <h2 id="price-title">Pick your pop of color.</h2>
+          </div>
+          <p class="section-intro">Browse every balloon, bouquet, kit, and accessory. Choose available options before adding an item to your cart.</p>
+        </div>
+
+        <div class="catalog-tools">
+          <div class="mobile-search-row">
+            <input class="catalog-search" id="catalog-search" type="search" placeholder="Search by name, SKU, or category" aria-label="Search balloon catalog">
+            <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="catalog-filters">Categories</button>
+          </div>
+          <div class="filter-chips" id="catalog-filters" aria-label="Filter by category"><button class="filter-chip active" type="button" data-category="All">All</button><button class="filter-chip" type="button" data-category="Birthday">Birthday</button><button class="filter-chip" type="button" data-category="Numbers">Numbers</button><button class="filter-chip" type="button" data-category="Baby">Baby</button><button class="filter-chip" type="button" data-category="Bouquets">Bouquets</button><button class="filter-chip" type="button" data-category="Latex">Latex</button><button class="filter-chip" type="button" data-category="Wedding">Wedding</button><button class="filter-chip" type="button" data-category="Get Well">Get Well</button><button class="filter-chip" type="button" data-category="Graduation">Graduation</button><button class="filter-chip" type="button" data-category="Sports">Sports</button><button class="filter-chip" type="button" data-category="Specialty">Specialty</button><button class="filter-chip" type="button" data-category="Supershapes">Supershapes</button><button class="filter-chip" type="button" data-category="Characters">Characters</button><button class="filter-chip" type="button" data-category="Hearts">Hearts</button><button class="filter-chip" type="button" data-category="Stars">Stars</button><button class="filter-chip" type="button" data-category="Helium &amp; Accessories">Helium &amp; Accessories</button><button class="filter-chip" type="button" data-category="Kits &amp; Garlands">Kits &amp; Garlands</button></div>
+        </div>
+        <div class="catalog-meta"><span>Prices shown per item</span></div>
+        <div class="product-grid" id="product-grid" aria-live="polite"></div>
+        <div class="no-results" id="no-results" hidden>No products match that search. Try another word or category.</div>
+
+        <div class="catalog-cta">
+          <p>Know what you want? Tell us the occasion, colors, quantity, and pickup or delivery details.</p>
+          <button class="button js-open-cart" type="button">Review your order</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-section" aria-labelledby="order-title">
+      <div class="wrap order-panel">
+        <div class="order-head">
+          <h2 id="order-title">3 easy ways to order.</h2>
+          <p>Choose the option that works for you. We’re happy to help with designs, colors, and timing.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="step-num">1</span>
+            <h3>Order online</h3>
+            <p>Use our quick form to share what you need and when you need it.</p>
+            <button class="button js-open-cart" type="button">Review your cart</button>
+          </article>
+          <article class="step">
+            <span class="step-num">2</span>
+            <h3>Give us a call</h3>
+            <p>Ask about available designs, colors, custom messages, and timing.</p>
+            <a class="step-link" href="tel:+15169605201" aria-label="Call Granny's Pharmacy at (516) 960-5201">(516) 960-5201</a>
+          </article>
+          <article class="step">
+            <span class="step-num">3</span>
+            <h3>Visit the store</h3>
+            <p>5624 Merrick Road, Massapequa, NY 11758 — directly across from Lidl.</p>
+            <span>Mon–Fri 10–6 · Sat 10–3</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="delivery-title">
+      <div class="wrap delivery">
+        <div class="delivery-card">
+          <p class="eyebrow">Local delivery</p>
+          <h2 id="delivery-title">We’ll bring the celebration.</h2>
+          <p class="big">Free over $49</p>
+          <p>In The Massapequas, Seaford &amp; Amityville.</p>
+        </div>
+        <div class="delivery-details">
+          <div class="detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <div><h3>Order by 2 PM</h3><p>For scheduled same-day or next-day delivery.</p></div>
+          </div>
+          <div class="detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h11v10H3V6Zm11 4h4l3 3v3h-7v-6ZM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <div><h3>Choose a delivery window</h3><p>10 AM–1 PM or 1 PM–4 PM.</p></div>
+          </div>
+          <div class="footer-cta"><a class="button" href="#catalog">Start your balloon order</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="fineprint">
+        <p>Selection and availability may vary — ask our team for current colors and designs.</p>
+        <p>Helium service is subject to balloon condition, suitability, and store availability.</p>
+      </div>
+      <div class="hours" aria-label="Store hours">
+        <strong>Store hours</strong>
+        <span>Monday–Friday</span><span>10 AM–6 PM</span>
+        <span>Saturday</span><span>10 AM–3 PM</span>
+        <span>Sunday</span><span class="closed">Closed</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="cart-trigger js-open-cart" type="button" aria-label="Open balloon cart">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h2l2.2 9h9.6l2-6H7.2M10 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    My cart <span class="cart-count" aria-live="polite">0</span>
+  </button>
+
+  <div class="cart-overlay" id="cart-overlay" aria-hidden="true">
+    <aside class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-head">
+        <div>
+          <h2 id="cart-title">Your balloon order</h2>
+          <p>Review your selections, then call Granny's to place your order.</p>
+        </div>
+        <button class="cart-close" type="button" aria-label="Close cart">×</button>
+      </div>
+
+      <div id="cart-content">
+        <div class="cart-empty" id="cart-empty">Your cart is empty. Choose balloons from the catalog to get started.</div>
+        <div class="cart-list" id="cart-list" aria-live="polite"></div>
+        <div class="cart-summary" id="cart-summary" hidden><span>Estimated subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+        <p class="quote-note" id="quote-note" hidden>Items marked “price confirmed by the pharmacy” are not included in the estimate.</p>
+
+        <a class="order-submit cart-call" href="tel:+15169605201" aria-label="Call Granny's Pharmacy at (516) 960-5201">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.8 3.8 6.7 2.4c-.8-.5-1.8-.3-2.3.4C1.2 7.3 5.9 17.8 13.8 21c.9.4 1.9 0 2.3-.8l1.1-2.3c.4-.8.1-1.7-.6-2.2l-2.5-1.5c-.7-.4-1.5-.3-2 .3l-1 1.1c-2.2-1.1-3.6-2.7-4.3-4.7L8.4 9c.6-.7.7-1.6.4-2.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          Call now · (516) 960-5201
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+(function(){
+var products=[{"sku":"GP-BD-01","name":"Happy Birthday Foil 18\" — Blush","category":"Birthday","price":4.99,"image":"images/balloon-002.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-02","name":"Spiderman Foil Balloon 17\"","category":"Characters","price":11.99,"image":"images/balloon-003.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-03","name":"Elmo Foil Balloon 20\"","category":"Characters","price":13.99,"image":"images/balloon-004.gif","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-04","name":"Mickey Mouse Foil Balloon 18\"","category":"Characters","price":5.99,"image":"images/balloon-005.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-05","name":"Star Foil 19\" — Burgundy","category":"Stars","price":4.99,"image":"images/balloon-006.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-06","name":"Heart Foil 18\" — Satin Luxe White","category":"Hearts","price":4.99,"image":"images/balloon-007.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-07","name":"Magical Birthday Holographic Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-008.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-08","name":"Happy Birthday Burst Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-009.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-09","name":"Happy Birthday Balloons Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-010.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-10","name":"Happy Birthday Tiered Cake Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-011.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-11","name":"Happy Birthday Classic Sparkles Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-012.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-12","name":"Happy Birthday Fizz Blue Holographic Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-013.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-13","name":"Happy Birthday Wishes Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-014.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-14","name":"Happy Birthday Dogs Pawsome Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-015.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-15","name":"Happy Birthday Satin Orbs Foil 18\"","category":"Birthday","price":11.99,"image":"images/balloon-016.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-16","name":"Happy Birthday Confetti GBall Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-017.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-17","name":"Happy Birthday Brown Flower Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-018.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-18","name":"Happy Birthday Ballerina Foil 18\"","category":"Birthday","price":4.99,"image":"images/balloon-019.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BD-19","name":"Happy BDay Bash Foil 28\"","category":"Supershapes","price":21.99,"image":"images/balloon-020.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-05","name":"Minnie Mouse Forever Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-021.webp","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-06","name":"Cinderella Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-022.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-07","name":"Little Mermaid Ariel Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-023.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-08","name":"Little Mermaid Ariel Live Action Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-024.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-09","name":"Tiana Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-025.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-10","name":"Sesame Street Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-026.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-11","name":"Avengers Orbz Foil 16\"","category":"Characters","price":19.99,"image":"images/balloon-027.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-12","name":"Pokemon Ball Orbz Foil 16\"","category":"Characters","price":19.99,"image":"images/balloon-028.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-18","name":"Spiderman Orbz Foil 16\"","category":"Characters","price":17.99,"image":"images/balloon-029.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-13","name":"Monkey Jungle Body Foil 33\"","category":"Supershapes","price":21.99,"image":"images/balloon-030.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-14","name":"Paw Patrol Dino Movie Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-031.png","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-15","name":"Toy Story 5 Foil 18\"","category":"Characters","price":5.99,"image":"images/balloon-032.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-16","name":"Dinosaur T-Rex Foil 34\"","category":"Supershapes","price":21.99,"image":"images/balloon-033.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-CH-17","name":"Spiderman Body Foil 29\"","category":"Supershapes","price":21.99,"image":"images/balloon-034.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-01","name":"Baby Boy Foil Balloon","category":"Baby","price":4.99,"image":"images/balloon-035.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-02","name":"Baby Girl Foil Balloon","category":"Baby","price":4.99,"image":"images/balloon-036.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-04","name":"Baby Bottle Boy Blue Foil 20\"","category":"Baby","price":13.99,"image":"images/balloon-037.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-05","name":"Baby Bottle Girl Pink Foil 20\"","category":"Baby","price":13.99,"image":"images/balloon-038.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-06","name":"Baby Teddy Bear Foil 26\"","category":"Supershapes","price":21.99,"image":"images/balloon-039.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-07","name":"Hello Baby Teddy Bear Foil 18\"","category":"Baby","price":4.99,"image":"images/balloon-040.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-08","name":"Welcome Baby Dots & Flowers Foil 18\"","category":"Baby","price":4.99,"image":"images/balloon-041.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-10","name":"Giraffe Baby Girl Safari Foil 42\"","category":"Supershapes","price":21.99,"image":"images/balloon-042.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-11","name":"Giraffe Baby Boy Safari Foil 42\"","category":"Supershapes","price":21.99,"image":"images/balloon-043.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-12","name":"It's A Boy Gingham Foil 18\"","category":"Baby","price":4.99,"image":"images/balloon-035.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-13","name":"It's A Girl Gingham Foil 18\"","category":"Baby","price":4.99,"image":"images/balloon-036.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-14","name":"Welcome Languages Foil 18\"","category":"Baby","price":4.99,"image":"images/balloon-046.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-15","name":"Elephant White Foil 26\"","category":"Supershapes","price":21.99,"image":"images/balloon-047.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-16","name":"Baby Celebrate Foil 24\" — Tan","category":"Baby","price":21.99,"image":null,"imageLabel":"In stock","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BB-17","name":"Baby Welcome Foil 24\" — Light","category":"Baby","price":21.99,"image":null,"imageLabel":"In stock","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-PK-05","name":"\"Welcome Baby\" Heart Foil (packaged)","category":"Baby","price":4.99,"image":"images/balloon-048.jpg","options":{"Fill":["Take home uninflated","Add foil helium fill (+$3.50)"]},"types":["Mylar / foil balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-06","name":"\"It's a Boy!\" Round Foil (packaged)","category":"Baby","price":4.99,"image":"images/balloon-049.jpg","options":{"Fill":["Take home uninflated","Add foil helium fill (+$3.50)"]},"types":["Mylar / foil balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-19","name":"Airloonz \"It's a Boy\" / \"It's a Girl\" Letter Kit","category":"Baby","price":14.99,"image":"images/balloon-050.jpg","options":{"Style":["Boy","Girl"],"Fill":["Take home uninflated","Assemble & air-inflate in store"]},"types":["Mylar / foil balloons"],"unit":"take-home kit","filled":false},{"sku":"GP-ST-02","name":"Star Foil 19\" — Iridescent Silver","category":"Stars","price":6.99,"image":"images/balloon-051.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-ST-03","name":"Star Foil 19\" — Vibrant Lime Green","category":"Stars","price":4.99,"image":"images/balloon-052.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-ST-04","name":"Star Foil 19\" — Vibrant Pink","category":"Stars","price":4.99,"image":"images/balloon-053.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-ST-05","name":"Star Foil 19\" — Satin Luxe Mint Green","category":"Stars","price":4.99,"image":"images/balloon-054.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-ST-06","name":"Star Foil 19\" — Satin Luxe Pomegranate Burgundy","category":"Stars","price":4.99,"image":"images/balloon-055.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-ST-07","name":"Star Foil 19\" — Iridescent Pastel Rainbow","category":"Stars","price":4.99,"image":"images/balloon-056.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-ST-08","name":"Star Foil 19\" — Red","category":"Stars","price":4.99,"image":"images/balloon-057.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-PK-01","name":"Star Foil Balloon — Single (packaged)","category":"Stars","price":4.99,"image":"images/balloon-058.jpg","options":{"Color":["Pink","Black","Gold","Blue","Silver","Purple"],"Fill":["Take home uninflated","Add foil helium fill (+$3.50)"]},"types":["Mylar / foil balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-HT-02","name":"Heart Foil 18\" — Satin Luxe Pastel Blue","category":"Hearts","price":4.99,"image":"images/balloon-059.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-HT-03","name":"Heart Foil 18\" — Satin Luxe Pastel Lilac","category":"Hearts","price":4.99,"image":"images/balloon-060.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-HT-04","name":"Heart Foil 18\" — Bright Gum Pink","category":"Hearts","price":4.99,"image":"images/balloon-061.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-HT-05","name":"Heart Foil 18\" — Red","category":"Hearts","price":4.99,"image":"images/balloon-062.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-PK-02","name":"Heart Foil Balloon — Single (packaged)","category":"Hearts","price":4.99,"image":"images/balloon-063.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-PK-15","name":"Satin Luxe Heart Foil — Single (packaged)","category":"Hearts","price":4.99,"image":"images/balloon-064.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-NB-01","name":"Giant Number Balloon 34\" — Gold","category":"Numbers","price":9.99,"image":"images/balloon-065.jpg","options":{"Digit":["0","1","2","3","4","5","6","7","8","9"],"Fill":["Take home uninflated","Add foil helium fill (+$5.00)"]},"types":["Number / letter balloons"],"unit":"each","filled":false},{"sku":"GP-NB-02","name":"Giant Number Balloon 34\" — Silver","category":"Numbers","price":9.99,"image":"images/balloon-066.jpg","options":{"Digit":["0","1","2","3","4","5","6","7","8","9"],"Fill":["Take home uninflated","Add foil helium fill (+$5.00)"]},"types":["Number / letter balloons"],"unit":"each","filled":false},{"sku":"GP-NB-03","name":"Giant Number Balloon 34\" — Black","category":"Numbers","price":9.99,"image":"images/balloon-067.webp","options":{"Digit":["0","1","2","3","4","5","6","7","8","9"],"Fill":["Take home uninflated","Add foil helium fill (+$5.00)"]},"types":["Number / letter balloons"],"unit":"each","filled":false},{"sku":"GP-NB-04","name":"Giant Number Balloon 34\" — Matte Pink & Blue","category":"Numbers","price":9.99,"image":"images/balloon-068.webp","options":{"Color":["Matte Pink","Matte Blue"],"Digit":["0","1","2","3","4","5","6","7","8","9"],"Fill":["Take home uninflated","Add foil helium fill (+$5.00)"]},"types":["Number / letter balloons"],"unit":"each","filled":false},{"sku":"GP-NB-05","name":"Giant Number Balloon 34\" — Pastel Pink (1)","category":"Numbers","price":9.99,"image":"images/balloon-069.jpg","options":{"Fill":["Take home uninflated","Add foil helium fill (+$5.00)"]},"types":["Number / letter balloons"],"unit":"each","filled":false},{"sku":"GP-PK-03","name":"Number Foil Balloon — Single (packaged)","category":"Numbers","price":9.99,"image":"images/balloon-070.jpg","options":{"Color":["Rose Gold","Red","Pink","Black"],"Digit":["0","1","2","3","4","5","6","7","8","9"],"Fill":["Take home uninflated","Add foil helium fill (+$5.00)"]},"types":["Number / letter balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-LX-01","name":"11\" Latex Balloon — Solid Colors","category":"Latex","price":2.49,"image":"images/balloon-071.webp","options":{"Color":["Red","Blue","Yellow","Violet","Orange","Pink Bubblegum","Forest Green","Matcha Green","Aqua Blue"]},"types":["Latex balloons"],"unit":"each","filled":true},{"sku":"GP-LX-02","name":"11\" Latex Balloon — Pastel & Matte","category":"Latex","price":2.49,"image":"images/balloon-072.webp","options":{"Color":["Pastel Matte Pink","Pastel Matte Blue","Pastel Matte Green","Pastel Matte Lilac","Pastel Matte Yellow","Assorted Pastel"]},"types":["Latex balloons"],"unit":"each","filled":true},{"sku":"GP-LX-03","name":"11\" Latex Balloon — Chrome & Reflex","category":"Latex","price":2.99,"image":"images/balloon-073.webp","options":{"Color":["Reflex Pink","Reflex Silver","Chrome Champagne","Chrome Gold","Chrome Blue","Aurora Green"]},"types":["Latex balloons"],"unit":"each","filled":true},{"sku":"GP-LX-04","name":"36\" Jumbo Latex Balloon — Gender Reveal","category":"Latex","price":9.99,"image":"images/balloon-074.jpg","options":{"Style":["Gender Reveal Blue","Gender Reveal Pink"]},"types":["Latex balloons"],"unit":"each","filled":true},{"sku":"GP-LX-05","name":"11\" Latex Balloon — Satin Luxe","category":"Latex","price":2.99,"image":"images/balloon-075.jpg","options":{"Color":["Emerald Green","Platinum Silver","Palm Leaf Green","Amber Copper","Pastel Blue","Azure"]},"types":["Latex balloons"],"unit":"each","filled":true},{"sku":"GP-LX-06","name":"11\"/12\" Latex Balloon — Prints & Confetti","category":"Latex","price":2.49,"image":"images/balloon-076.jpg","options":{"Design":["Smiley Face Yellow","Happy Birthday Confetti","Polka Dot Light Blue","Polka Dot Light Pink"]},"types":["Latex balloons"],"unit":"each","filled":true},{"sku":"GP-LX-07","name":"Half-Dozen Latex Bundle — 6 Balloons","category":"Latex","price":12.99,"image":"images/balloon-071.webp","options":{"Color":["Red","Blue","Yellow","Violet","Orange","Pink Bubblegum","Forest Green","Matcha Green","Aqua Blue","Assorted Mix"]},"types":["Latex balloons"],"unit":"bundle","filled":true},{"sku":"GP-PK-08","name":"Latex Balloon Color Mix Pack","category":"Latex","price":5.99,"image":"images/balloon-078.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-09","name":"Satin Luxe Latex Pack","category":"Latex","price":6.99,"image":"images/balloon-079.jpg","options":{"Color":["Burgundy","Navy","Gold"],"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-10","name":"Confetti Latex Balloon Pack","category":"Latex","price":5.99,"image":"images/balloon-080.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-11","name":"Clear Droplet Latex Pack (6 ct)","category":"Latex","price":3.79,"image":"images/balloon-081.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-12","name":"Pastel Polka-Dot Latex Pack (12 ct)","category":"Latex","price":5.99,"image":"images/balloon-082.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-13","name":"Super Mario Confetti Latex Pack (6 ct)","category":"Latex","price":6.99,"image":"images/balloon-083.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Mylar / foil balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-14","name":"Character Latex Pack (6 ct)","category":"Latex","price":5.99,"image":"images/balloon-084.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Mylar / foil balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-PK-20","name":"Celebration Latex Pack (15 ct)","category":"Latex","price":6.99,"image":"images/balloon-085.jpg","options":{"Fill":["Take home uninflated","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-WD-01","name":"Congrats White Wedding Engagement Foil 18\"","category":"Wedding","price":4.99,"image":"images/balloon-086.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-WD-02","name":"Wedding Ring Foil Balloon 31\"","category":"Supershapes","price":21.99,"image":"images/balloon-087.webp","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-WD-03","name":"Congrats Confetti Sprinkle Foil 18\"","category":"Wedding","price":4.99,"image":"images/balloon-088.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-GW-01","name":"Get Well Rainbow Foil 30\"","category":"Supershapes","price":21.99,"image":"images/balloon-089.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-GW-02","name":"Feel Better Soon Foil 18\"","category":"Get Well","price":4.99,"image":"images/balloon-090.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-GW-03","name":"Feel Better Soon Foil 28\"","category":"Supershapes","price":21.99,"image":"images/balloon-091.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-GR-01","name":"Congrats Grad Gold Glitter Foil 18\"","category":"Graduation","price":4.99,"image":"images/balloon-092.webp","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-GR-02","name":"Congrats Grad Party Foil 18\"","category":"Graduation","price":4.99,"image":"images/balloon-093.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-PK-07","name":"\"GRAD\" Letter Balloon Set (packaged)","category":"Graduation","price":4.99,"image":"images/balloon-094.jpg","options":{"Fill":["Take home uninflated","Add foil helium fill (+$3.50)"]},"types":["Mylar / foil balloons"],"unit":"take-home pack","filled":false},{"sku":"GP-SP-01","name":"Football Team Balloon Bouquet","category":"Sports","price":26.99,"image":"images/balloon-095.webp","options":{"Team":["NY Giants","Philadelphia Eagles","NY Jets"]},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-SP-05","name":"It's A Game Day Football Foil 18\"","category":"Sports","price":4.99,"image":"images/balloon-096.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-SP-02","name":"Airloonz Wine Glass Cheers Foil 51\"","category":"Supershapes","price":24.99,"image":"images/balloon-097.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":false},{"sku":"GP-SP-03","name":"Airloonz Rainbow Foil 52\"","category":"Supershapes","price":19.99,"image":"images/balloon-098.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":false},{"sku":"GP-SP-04","name":"Round Satin Luxe Gold Foil 18\"","category":"Specialty","price":4.99,"image":"images/balloon-099.jpg","options":{},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BQ-01","name":"Character Balloon Bouquet","category":"Bouquets","price":19.99,"image":"images/balloon-100.webp","options":{"Design":["Trolls World Tour","Dinomite Party","Princess Once Upon A Time","Sesame Street","Baby Shark","Avengers","Paw Patrol Chase","Stitch","Bluey","Moana","Jurassic World","Sonic 2","Spongebob","Winnie the Pooh","Frozen 2","Pokemon","Hot Wheels","Spidey & Friends","Wish"]},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BQ-02","name":"Birthday Balloon Bouquet","category":"Bouquets","price":19.99,"image":"images/balloon-009.jpg","options":{"Design":["Happy Birthday Blush","Magical Birthday","Birthday Burst","Tiered Cake","Classic Sparkles"]},"types":["Mylar / foil balloons"],"unit":"each","filled":true},{"sku":"GP-BQ-03","name":"Welcome Baby Deluxe Bundle","category":"Bouquets","price":38.99,"image":"images/balloon-043.jpg","options":{"Style":["Boy","Girl"]},"types":["Mylar / foil balloons"],"unit":"each","filled":true,"assembly":"One 42-inch giraffe foil (Baby Boy or Baby Girl), two matching 18-inch gingham foils, and two pastel matte latex balloons; arranged and inflated in-store."},{"sku":"GP-PK-16","name":"Balloon Garland Kit (75/76 pc)","category":"Kits & Garlands","price":9.99,"image":"images/balloon-103.jpg","options":{"Theme":["Pink / Blue","Gold","Silver","Teal","Purple"],"Fill":["DIY air-fill","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home kit","filled":false},{"sku":"GP-PK-17","name":"Balloon Arch Kit","category":"Kits & Garlands","price":9.99,"image":"images/balloon-104.jpg","options":{"Fill":["DIY air-fill","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home kit","filled":false},{"sku":"GP-PK-18","name":"Gold & White Balloon Garland (95 pc)","category":"Kits & Garlands","price":9.99,"image":"images/balloon-105.jpg","options":{"Fill":["DIY air-fill","Add latex helium fill (+$2.50 each)"]},"types":["Latex balloons"],"unit":"take-home kit","filled":false},{"sku":"GP-HA-01","name":"Helium Fill — Latex Balloon","category":"Helium & Accessories","price":2.5,"image":null,"options":{},"types":["Helium fill (balloons filled in-store)"],"unit":"per balloon","filled":false},{"sku":"GP-HA-02","name":"Helium Fill — Foil Balloon","category":"Helium & Accessories","price":3.5,"image":null,"options":{},"types":["Helium fill (balloons filled in-store)"],"unit":"per balloon","filled":false},{"sku":"GP-HA-03","name":"Balloon Weight — Gold","category":"Helium & Accessories","price":2.99,"image":"images/balloon-106.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-06","name":"Balloon Weight — Baby Blue","category":"Helium & Accessories","price":2.99,"image":"images/balloon-107.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-07","name":"Balloon Weight — White","category":"Helium & Accessories","price":2.99,"image":"images/balloon-108.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-08","name":"Balloon Weight — Pink","category":"Helium & Accessories","price":2.99,"image":"images/balloon-109.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-04","name":"Curling Ribbon — Black","category":"Helium & Accessories","price":2.99,"image":"images/balloon-110.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-05","name":"Curling Ribbon — Holographic Silver","category":"Helium & Accessories","price":3.79,"image":"images/balloon-111.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-09","name":"Curling Ribbon — Emerald Green","category":"Helium & Accessories","price":2.99,"image":"images/balloon-112.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-10","name":"Curling Ribbon — Silver","category":"Helium & Accessories","price":2.99,"image":"images/balloon-113.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-11","name":"Curling Ribbon — Purple","category":"Helium & Accessories","price":2.99,"image":"images/balloon-114.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-12","name":"Curling Ribbon — Orange","category":"Helium & Accessories","price":2.99,"image":"images/balloon-115.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-13","name":"Curling Ribbon — Lavender","category":"Helium & Accessories","price":2.99,"image":"images/balloon-116.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-14","name":"Curling Ribbon — Yellow Daffodil","category":"Helium & Accessories","price":2.99,"image":"images/balloon-117.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-15","name":"Curling Ribbon — Red Fiesta","category":"Helium & Accessories","price":2.99,"image":"images/balloon-118.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false},{"sku":"GP-HA-16","name":"Curling Ribbon — Light Blue Fiesta","category":"Helium & Accessories","price":2.99,"image":"images/balloon-119.jpg","options":{},"types":["Balloon accessories"],"unit":"each","filled":false}];
+var invoiceSkuMap={
+  'GP-BD-01':'4211601','GP-BD-02':'3466901','GP-BD-03':'0250001','GP-BD-04':'4069901','GP-BD-05':'1111302','GP-BD-06':'3859002','GP-BD-07':'1617A7A','GP-BD-08':'1581118s','GP-BD-09':'1581818P','GP-BD-10':'4594701','GP-BD-11':'26664p','GP-BD-12':'226621','GP-BD-13':'4695101','GP-BD-14':'4655601','GP-BD-15':'4593501','GP-BD-16':'1818218s','GP-BD-17':'1919318s','GP-BD-18':'4785301','GP-BD-19':'5086801',
+  'GP-CH-05':'4070401','GP-CH-06':'3979801','GP-CH-08':'4552502','GP-CH-09':'3980501','GP-CH-10':'4424701','GP-CH-11':'4071201','GP-CH-12':'2946401','GP-CH-18':'5027501','GP-CH-13':'25209p','GP-CH-14':'5028201','GP-CH-15':'5027901','GP-CH-16':'4066801','GP-CH-17':'5027401',
+  'GP-BB-01':'4569101','GP-BB-02':'4569301','GP-BB-04':'4474101','GP-BB-05':'4474201','GP-BB-06':'25548p','GP-BB-07':'26548p','GP-BB-08':'1682418s','GP-BB-10':'2518101','GP-BB-11':'2458301','GP-BB-12':'26677p','GP-BB-13':'26676p','GP-BB-14':'5065201','GP-BB-15':'FB91','GP-BB-16':'3520101','GP-BB-17':'6540802',
+  'GP-ST-02':'3927001','GP-ST-03':'4711601','GP-ST-04':'4711802','GP-ST-05':'3991501','GP-ST-06':'3682901','GP-ST-07':'3940701','GP-ST-08':'3058401',
+  'GP-HT-02':'3991102','GP-HT-03':'3990502','GP-HT-04':'2302001','GP-HT-05':'1058401','GP-NB-05':'15841mp','GP-LX-04':'56594P2',
+  'GP-WD-01':'4570101','GP-WD-02':'35366P','GP-WD-03':'4568601','GP-GW-01':'3548901','GP-GW-02':'5065901','GP-GW-03':'5066001','GP-GR-01':'4421302','GP-GR-02':'4745601',
+  'GP-SP-05':'88184lkf','GP-SP-02':'4246811','GP-SP-03':'4246211','GP-SP-04':'3680101',
+  'GP-HA-06':'8444702','GP-HA-07':'8445702','GP-HA-08':'112725.06','GP-HA-04':'31626','GP-HA-05':'H10020','GP-HA-09':'31622','GP-HA-10':'31620','GP-HA-11':'31609','GP-HA-12':'31635','GP-HA-13':'30808','GP-HA-14':'31665','GP-HA-15':'16037-065- 01T','GP-HA-16':'16037-053- 01T'
+};
+var optionSkuMap={
+  'GP-NB-01':{'0':'1965234','1':'1965334','2':'1965434','3':'1965534','4':'1965634','5':'1965734','6':'1965834','7':'1965934','8':'1966034','9':'1966134'},
+  'GP-NB-02':{'0':'1964234','1':'1964334','2':'1964434','3':'1964534','4':'1964634','5':'1964734','6':'1964834','8':'1965034','9':'1965134'},
+  'GP-NB-03':{'0':'1968234','1':'1968334','2':'1968434','3':'1968534','4':'1968634','5':'1968734','6':'1968834','7':'1968934','8':'1969034','9':'1969134'},
+  'GP-NB-04':{
+    'Matte Pink|0':'604209','Matte Pink|2':'604223','Matte Pink|3':'604230','Matte Pink|4':'604247','Matte Pink|5':'604254','Matte Pink|6':'604261','Matte Pink|7':'604278','Matte Pink|8':'604285','Matte Pink|9':'604292',
+    'Matte Blue|0':'604308','Matte Blue|1':'604315','Matte Blue|2':'604322','Matte Blue|3':'604339','Matte Blue|4':'604346','Matte Blue|5':'604353','Matte Blue|6':'604360','Matte Blue|7':'604377','Matte Blue|8':'604384','Matte Blue|9':'604391'
+  },
+  'GP-LX-01':{'Red':'53012','Blue':'53006','Yellow':'53005','Violet':'53030','Orange':'53013','Pink Bubblegum':'53074','Forest Green':'53024','Matcha Green':'11223562','Aqua Blue':'11223572'},
+  'GP-LX-02':{'Pastel Matte Pink':'53174','Pastel Matte Blue':'53177','Pastel Matte Green':'53176','Pastel Matte Lilac':'53178','Pastel Matte Yellow':'53175','Assorted Pastel':'53179'},
+  'GP-LX-03':{'Reflex Pink':'53141','Reflex Silver':'53145','Chrome Champagne':'53426','Chrome Gold':'53148','Chrome Blue':'53143','Aurora Green':'53541'},
+  'GP-LX-05':{'Emerald Green':'4820201','Platinum Silver':'4822101','Palm Leaf Green':'4821301','Amber Copper':'4819501','Pastel Blue':'4821501','Azure':'4819701'},
+  'GP-LX-06':{'Smiley Face Yellow':'53546','Happy Birthday Confetti':'21259023','Polka Dot Light Blue':'21267013','Polka Dot Light Pink':'21267023'},
+  'GP-SP-01':{'NY Giants':'3140001','Philadelphia Eagles':'3141001','NY Jets':'4158001'},
+  'GP-BQ-01':{'Trolls World Tour':'4072401','Dinomite Party':'4067001','Princess Once Upon A Time':'3980801','Sesame Street':'3439801','Baby Shark':'4076201','Avengers':'4071101','Paw Patrol Chase':'4307701','Stitch':'4661501','Bluey':'4339001','Moana':'3395601','Jurassic World':'4425301','Sonic 2':'4452401','Spongebob':'4903001','Winnie the Pooh':'4841201','Frozen 2':'4038901','Pokemon':'4843101','Hot Wheels':'4658901','Spidey & Friends':'4841801','Wish':'4642001'},
+  'GP-BQ-02':{'Happy Birthday Blush':'4211601','Magical Birthday':'1617A7A','Birthday Burst':'1581118s','Tiered Cake':'4594701','Classic Sparkles':'26664p'}
+};
+var optionSkuKeys={'GP-NB-01':['Digit'],'GP-NB-02':['Digit'],'GP-NB-03':['Digit'],'GP-NB-04':['Color','Digit'],'GP-LX-01':['Color'],'GP-LX-02':['Color'],'GP-LX-03':['Color'],'GP-LX-05':['Color'],'GP-LX-06':['Design'],'GP-SP-01':['Team'],'GP-BQ-01':['Design'],'GP-BQ-02':['Design']};
+var supplierImageSet=new Set('0250001|1058401|1111302|11223562|11223572|1581118s|1581818p|15841mp|1611818s|1611918s|16811-18s|1682418s|1818218s|1919318s|192000spp|1964234|1964334|1964434|1964534|1964634|1964734|1964834|1965034|1965134|1965234|1965334|1965434|1965534|1965634|1965734|1965834|1965934|1966034|1966134|1968234|1968334|1968434|1968534|1968634|1968734|1968834|1968934|1969034|1969134|1970618s|21259023|21267013|21267023|21273363|226621|2302001|2458301|2518101|25209p|25548p|26548p|26664p|26676p|26677p|2946401|3058401|30808|3140001|3141001|31609|31620|31622|31626|31635|31665|3395601|3439801|3466901|35366p|3548901|3680101|3682901|3859002|3927001|3940701|3979801|3980501|3980801|3990502|3991102|3991501|4038901|4066801|4067001|4069901|4070401|4071101|4071201|4072401|4076201|4134001|4158001|4211601|4224101|4246211|4246811|4307701|4339001|4421302|4424701|4425301|4452401|4474101|4474201|4552502|4568601|4569101|4569301|4570101|4593501|4594701|4642001|4655601|4658901|4661501|4695101|4711601|4711802|4745601|4785301|4819501|4819701|4820201|4821301|4821501|4822101|4841201|4841801|4843101|4903001|5027301|5027401|5027501|5027901|5028201|5028801|5063901|5065201|5065901|5066001|5085501|5086001|5086201|5086801|53002|53005|53006|53010|53012|53013|53014|53023|53024|53025|53030|53050|53074|53075|53141|53143|53145|53148|53174|53175|53176|53177|53178|53179|53361|53426|53527|53541|53546|53556|53599|53662|56594p2|604209|604223|604230|604247|604254|604261|604278|604285|604292|604308|604315|604322|604339|604346|604353|604360|604377|604384|604391|8445702|88184lkf|fb91|fg303|fg304|h10020'.split('|'));
+function normalizeSupplierSku(sku){return String(sku||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function supplierImage(sku){var key=normalizeSupplierSku(sku);return supplierImageSet.has(key)?'assets/supplier/'+key+'.jpg':''}
+var optionImageMap={
+  'GP-PK-19':{option:'Style',images:{'Boy':'images/balloon-043.jpg','Girl':'images/balloon-042.jpg'}},
+  'GP-PK-01':{option:'Color',images:{'Pink':'images/balloon-058.jpg','Black':'images/balloon-067.webp','Gold':'images/balloon-099.jpg','Blue':'images/balloon-059.jpg','Silver':'images/balloon-051.jpg','Purple':'images/balloon-060.jpg'}},
+  'GP-PK-02':{option:'Color',images:{'Red':'images/balloon-063.jpg','Purple':'images/balloon-060.jpg','Pink':'images/balloon-061.jpg'}},
+  'GP-NB-04':{option:'Color',images:{'Matte Pink':'images/balloon-068.webp','Matte Blue':'images/balloon-071.webp'}},
+  'GP-PK-03':{option:'Color',images:{'Rose Gold':'images/balloon-070.jpg','Red':'images/balloon-057.jpg','Pink':'images/balloon-069.jpg','Black':'images/balloon-067.webp'}},
+  'GP-LX-01':{option:'Color',images:{'Red':'images/balloon-062.jpg','Blue':'images/balloon-059.jpg','Yellow':'images/balloon-076.jpg','Violet':'images/balloon-060.jpg','Orange':'images/balloon-115.jpg','Pink Bubblegum':'images/balloon-072.webp','Forest Green':'images/balloon-075.jpg','Matcha Green':'images/balloon-054.jpg','Aqua Blue':'images/balloon-071.webp'}},
+  'GP-LX-02':{option:'Color',images:{'Pastel Matte Pink':'images/balloon-072.webp','Pastel Matte Blue':'images/balloon-059.jpg','Pastel Matte Green':'images/balloon-054.jpg','Pastel Matte Lilac':'images/balloon-060.jpg','Pastel Matte Yellow':'images/balloon-076.jpg','Assorted Pastel':'images/balloon-103.jpg'}},
+  'GP-LX-03':{option:'Color',images:{'Reflex Pink':'images/balloon-061.jpg','Reflex Silver':'images/balloon-051.jpg','Chrome Champagne':'images/balloon-099.jpg','Chrome Gold':'images/balloon-079.jpg','Chrome Blue':'images/balloon-071.webp','Aurora Green':'images/balloon-052.jpg'}},
+  'GP-LX-04':{option:'Style',images:{'Gender Reveal Blue':'images/balloon-071.webp','Gender Reveal Pink':'images/balloon-072.webp'}},
+  'GP-LX-05':{option:'Color',images:{'Emerald Green':'images/balloon-075.jpg','Platinum Silver':'images/balloon-051.jpg','Palm Leaf Green':'images/balloon-052.jpg','Amber Copper':'images/balloon-073.webp','Pastel Blue':'images/balloon-059.jpg','Azure':'images/balloon-071.webp'}},
+  'GP-LX-06':{option:'Design',images:{'Smiley Face Yellow':'images/balloon-076.jpg','Happy Birthday Confetti':'images/balloon-080.jpg','Polka Dot Light Blue':'images/balloon-059.jpg','Polka Dot Light Pink':'images/balloon-072.webp'}},
+  'GP-PK-09':{option:'Color',images:{'Burgundy':'images/balloon-073.webp','Navy':'images/balloon-071.webp','Gold':'images/balloon-079.jpg'}},
+  'GP-PK-16':{option:'Theme',images:{'Pink / Blue':'images/balloon-103.jpg','Gold':'images/balloon-105.jpg','Silver':'images/balloon-051.jpg','Teal':'images/balloon-071.webp','Purple':'images/balloon-060.jpg'}}
+};
+var cart=[]; var activeCategory='All'; var query='';
+var $=function(id){return document.getElementById(id)};
+var grid=$('product-grid'),overlay=$('cart-overlay'),list=$('cart-list');
+function money(n){return '$'+Number(n).toFixed(2)}
+function heliumExtra(o){var fill=(o||{}).Fill||'',match=String(fill).match(/\+\$(\d+(?:\.\d+)?)/);return match?Number(match[1]):0}
+function selectedUnitPrice(p,o){return p.price+heliumExtra(o)}
+function priceMarkup(p,o){var extra=heliumExtra(o),unit=extra?'with selected helium fill':(p.filled?'filled':p.unit),current=selectedUnitPrice(p,o);if(p.category==='Hearts')return money(current);return (p.regularPrice?'<span class="sale-label">Sale</span><del>'+money(p.regularPrice+extra)+'</del><span class="sale-price">'+money(current)+'</span>':money(current))+' <small>'+escapeHtml(unit)+'</small>'}
+function optionSummary(o){return Object.keys(o||{}).map(function(k){return k+': '+o[k]}).join(', ')}
+function keyFor(p,o){return p.sku+'|'+optionSummary(o)}
+function resolveInvoiceSku(p,o){var keys=optionSkuKeys[p.sku];if(keys){var map=optionSkuMap[p.sku]||{};var choice=keys.map(function(k){return (o||{})[k]||''}).join('|');return map[choice]||''}return invoiceSkuMap[p.sku]||''}
+function skuSearchText(p){return ((invoiceSkuMap[p.sku]||'')+' '+JSON.stringify(optionSkuMap[p.sku]||{})).toLowerCase()}
+function defaultOptions(p){var o={};Object.keys(p.options||{}).forEach(function(k){o[k]=p.options[k][0]});return o}
+function itemDisplayName(item){var options=optionSummary(item.options);return item.product.name+(options?' — '+options:'')}
+function updateProductSku(card,p){var node=card.querySelector('.product-sku');if(node){var sku=resolveInvoiceSku(p,chosen(card));node.textContent=sku?'SKU '+sku:''}}
+function updateProductPrice(card,p){var node=card.querySelector('.product-price');if(node)node.innerHTML=priceMarkup(p,chosen(card))}
+function previousProductImage(p,o){var map=optionImageMap[p.sku],selected=map&&(o||{})[map.option];return selected&&map.images[selected]?map.images[selected]:(p.image||'')}
+function resolvedProductImage(p,o){return supplierImage(resolveInvoiceSku(p,o))||previousProductImage(p,o)}
+function setProductImage(img,p,o,alt){var supplier=supplierImage(resolveInvoiceSku(p,o)),fallback=previousProductImage(p,o),src=supplier||fallback;if(!src)return false;img.classList.add('is-changing');img.onerror=function(){if(fallback&&img.getAttribute('src')!==fallback){img.src=fallback;return}img.classList.remove('is-changing')};img.onload=function(){img.classList.remove('is-changing')};img.src=src;img.alt=alt;return true}
+function updateOptionImage(card,p,value){var img=card.querySelector('.product-image'),note=card.querySelector('.product-image-note'),options=chosen(card);if(!img)return;setProductImage(img,p,options,p.name+' — '+value);if(note)note.textContent='Photo shown: '+value}
+function renderProducts(){grid.textContent='';var shown=0;products.forEach(function(p,i){var hay=(p.name+' '+p.category+' '+skuSearchText(p)).toLowerCase();if(activeCategory!=='All'&&p.category!==activeCategory||query&&hay.indexOf(query)<0)return;shown++;var card=document.createElement('article');card.className='product-card';card.dataset.index=i;var map=optionImageMap[p.sku],initial=map&&p.options[map.option]?p.options[map.option][0]:null,initialOptions=defaultOptions(p),initialSrc=resolvedProductImage(p,initialOptions);if(initialSrc){var visual=document.createElement('div');visual.className='product-visual';var img=document.createElement('img');img.className='product-image';img.width=600;img.height=600;setProductImage(img,p,initialOptions,initial?p.name+' — '+initial:p.name);visual.appendChild(img);if(initial){var note=document.createElement('p');note.className='product-image-note';note.textContent='Photo shown: '+initial;visual.appendChild(note)}card.appendChild(visual)}else{var empty=document.createElement('div');empty.className='product-image product-image-empty';empty.setAttribute('role','img');empty.setAttribute('aria-label',p.name);empty.textContent=p.imageLabel||'In-store helium service';card.appendChild(empty)}var b=document.createElement('div');b.className='product-body';b.innerHTML='<span class="product-category">'+escapeHtml(p.category)+'</span><h3>'+escapeHtml(p.name)+'</h3><p class="product-sku">'+escapeHtml(resolveInvoiceSku(p,defaultOptions(p))?'SKU '+resolveInvoiceSku(p,defaultOptions(p)):'')+'</p><p class="product-price'+(p.regularPrice?' on-sale':'')+'" aria-live="polite">'+priceMarkup(p,initialOptions)+'</p>';Object.keys(p.options).forEach(function(label){var f=document.createElement('div');f.className='option-field';var id='opt-'+i+'-'+label.toLowerCase().replace(/[^a-z]+/g,'-');var l=document.createElement('label');l.htmlFor=id;l.textContent=label;var sel=document.createElement('select');sel.id=id;sel.dataset.option=label;p.options[label].forEach(function(v){var op=document.createElement('option');op.textContent=v;op.value=v;sel.appendChild(op)});sel.addEventListener('change',function(){var imageMap=optionImageMap[p.sku],skuKeys=optionSkuKeys[p.sku]||[];if(skuKeys.indexOf(label)>=0||(imageMap&&imageMap.option===label))updateOptionImage(card,p,this.value);updateProductSku(card,p);updateProductPrice(card,p)});f.appendChild(l);f.appendChild(sel);b.appendChild(f)});var ctl=document.createElement('div');ctl.className='add-control';var add=document.createElement('button');add.type='button';add.className='add-button';add.textContent='Add to cart';add.onclick=function(){addProduct(i,card)};ctl.appendChild(add);b.appendChild(ctl);card.appendChild(b);grid.appendChild(card)});$('no-results').hidden=shown!==0}
+function escapeHtml(x){return String(x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function chosen(card){var o={};card.querySelectorAll('select[data-option]').forEach(function(s){o[s.dataset.option]=s.value});return o}
+function addProduct(i,card){var p=products[i],o=chosen(card),key=keyFor(p,o),item=cart.find(function(x){return x.key===key});if(item)item.qty++;else cart.push({key:key,product:p,options:o,invoiceSku:resolveInvoiceSku(p,o),qty:1,unit:selectedUnitPrice(p,o)});renderCart();openCart()}
+function count(){return cart.reduce(function(a,x){return a+x.qty},0)}
+function total(){return cart.reduce(function(a,x){return a+x.qty*x.unit},0)}
+function renderCart(){var c=count();document.querySelectorAll('.cart-count').forEach(function(n){n.textContent=c});list.textContent='';cart.forEach(function(item,idx){var r=document.createElement('div');r.className='cart-item';var info=document.createElement('div');info.innerHTML='<strong>'+escapeHtml(itemDisplayName(item))+'</strong><div class="cart-item-price">'+(item.invoiceSku?escapeHtml('SKU '+item.invoiceSku)+'<br>':'')+money(item.unit)+' each</div>';var ctl=document.createElement('div');ctl.className='qty-control';var m=document.createElement('button');m.type='button';m.className='qty-button';m.textContent='−';m.onclick=function(){item.qty--;if(item.qty<1)cart.splice(idx,1);renderCart()};var q=document.createElement('span');q.className='qty-value';q.textContent=item.qty;var p=document.createElement('button');p.type='button';p.className='qty-button';p.textContent='+';p.onclick=function(){item.qty++;renderCart()};ctl.append(m,q,p);var rm=document.createElement('button');rm.type='button';rm.className='remove-button';rm.textContent='Remove';rm.onclick=function(){cart.splice(idx,1);renderCart()};r.append(info,ctl,rm);list.appendChild(r)});$('cart-empty').hidden=c>0;$('cart-summary').hidden=c===0;$('cart-subtotal').textContent=money(total());$('quote-note').hidden=true}
+function openCart(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.classList.add('cart-open');document.querySelector('.cart-close').focus()}
+function closeCart(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.classList.remove('cart-open')}
+$('filter-toggle').addEventListener('click',function(){var expanded=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!expanded));$('catalog-filters').classList.toggle('open',!expanded)});$('catalog-search').addEventListener('input',function(){query=this.value.trim().toLowerCase();renderProducts()});document.querySelectorAll('.filter-chip').forEach(function(b){b.addEventListener('click',function(){activeCategory=b.dataset.category;document.querySelectorAll('.filter-chip').forEach(function(x){x.classList.toggle('active',x===b)});renderProducts();if(window.matchMedia('(max-width: 680px)').matches){$('catalog-filters').classList.remove('open');$('filter-toggle').setAttribute('aria-expanded','false')}})});document.querySelectorAll('.js-open-cart').forEach(function(b){b.addEventListener('click',openCart)});document.querySelector('.cart-close').addEventListener('click',closeCart);overlay.addEventListener('click',function(e){if(e.target===overlay)closeCart()});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart()});renderProducts();renderCart();
+})();
+  </script>
+</body>
+</html>
