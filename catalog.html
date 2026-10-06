@@ -1142,11 +1142,69 @@
 
         <div id="checkout-view" class="checkout-view" hidden>
           <h3>Checkout</h3>
-          <p class="co-sub">We’re opening the order form with your cart filled in…</p>
+          <p class="co-sub">Fill in your details, then review and submit on the order form.</p>
           <div class="co-order-lines" id="co-order-lines" aria-live="polite"></div>
-          <p class="co-sub">If the form doesn’t open, <a id="co-manual-link" href="#">tap here</a>.</p>
+          <div class="co-field" data-req="name">
+            <label for="co-name">Full name <span class="req">*</span></label>
+            <input type="text" id="co-name" autocomplete="name">
+            <span class="co-err">Please enter your name.</span>
+          </div>
+          <div class="co-field" data-req="phone">
+            <label for="co-phone">Phone number <span class="req">*</span></label>
+            <input type="tel" id="co-phone" autocomplete="tel" inputmode="tel">
+            <span class="co-err">Please enter a phone number so we can confirm your order.</span>
+          </div>
+          <div class="co-field">
+            <label>Pickup or delivery? <span class="req">*</span></label>
+            <div class="co-radio-row">
+              <label class="co-radio"><input type="radio" data-delivery-opt name="co-fulfillment" value="No, I'll pick up at 5624 Merrick Road, Massapequa" checked> Pickup</label>
+              <label class="co-radio"><input type="radio" data-delivery-opt name="co-fulfillment" value="Yes, please deliver"> Delivery</label>
+            </div>
+          </div>
+          <div id="co-delivery-fields" hidden>
+            <div class="co-field" data-req="address">
+              <label for="co-address">Delivery street address <span class="req">*</span></label>
+              <input type="text" id="co-address" autocomplete="street-address">
+              <span class="co-err">Please enter your street address.</span>
+            </div>
+            <div class="co-field" data-req="town">
+              <label for="co-town">Town <span class="req">*</span></label>
+              <select id="co-town">
+                <option value="">Choose a town…</option>
+                <option>Massapequa</option>
+                <option>Massapequa Park</option>
+                <option>East Massapequa</option>
+                <option>Amityville</option>
+                <option>Amityville Harbor</option>
+                <option>Other (Team Member will call to confirm)</option>
+              </select>
+              <span class="co-err">Please choose your town.</span>
+            </div>
+            <div class="co-field">
+              <label for="co-delivery-date">Preferred delivery date</label>
+              <input type="date" id="co-delivery-date">
+            </div>
+            <div class="co-field">
+              <label>Preferred time window</label>
+              <div class="co-radio-row">
+                <label class="co-radio"><input type="radio" name="co-timewin" value="10 AM – 1 PM"> 10 AM – 1 PM</label>
+                <label class="co-radio"><input type="radio" name="co-timewin" value="1 PM – 4 PM"> 1 PM – 4 PM</label>
+              </div>
+            </div>
+          </div>
+          <div id="co-pickup-fields">
+            <div class="co-field">
+              <label for="co-pickup-date">Preferred pickup date</label>
+              <input type="date" id="co-pickup-date">
+            </div>
+          </div>
+          <div class="co-field">
+            <label for="co-notes">Anything else we should know?</label>
+            <textarea id="co-notes" placeholder="Colors, theme, message on a balloon…"></textarea>
+          </div>
           <div class="co-actions">
             <button type="button" class="co-back" id="co-back">← Back</button>
+            <button type="button" class="order-submit co-submit" id="co-continue">Review order →</button>
           </div>
         </div>
 
@@ -1243,7 +1301,20 @@ function closeCart(){overlay.classList.remove('open');overlay.setAttribute('aria
 $('filter-toggle').addEventListener('click',function(){var expanded=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!expanded));$('catalog-filters').classList.toggle('open',!expanded)});$('catalog-search').addEventListener('input',function(){query=this.value.trim().toLowerCase();renderProducts()});document.querySelectorAll('.filter-chip').forEach(function(b){b.addEventListener('click',function(){activeCategory=b.dataset.category;document.querySelectorAll('.filter-chip').forEach(function(x){x.classList.toggle('active',x===b)});renderProducts();if(window.matchMedia('(max-width: 680px)').matches){$('catalog-filters').classList.remove('open');$('filter-toggle').setAttribute('aria-expanded','false')}})});document.querySelectorAll('.js-open-cart').forEach(function(b){b.addEventListener('click',openCart)});function coOrderText(){return cart.map(function(item){var opts=optionSummary(item.options);return item.qty+' x '+item.product.name+(opts?' -- '+opts:'')+(item.invoiceSku?' (SKU '+item.invoiceSku+')':'')+' -- '+money(item.unit)+' each'}).join('\n')+'\nEstimated subtotal: '+money(total())}
 function renderCoLines(){var box=$('co-order-lines');box.textContent='';cart.forEach(function(item){var d=document.createElement('div');var l=document.createElement('span');l.textContent=item.qty+' x '+itemDisplayName(item);var r=document.createElement('span');r.textContent=money(item.qty*item.unit);d.append(l,r);box.appendChild(d)});var t=document.createElement('div');t.className='co-total';var lt=document.createElement('span');lt.textContent='Estimated subtotal';var rt=document.createElement('span');rt.textContent=money(total());t.append(lt,rt);box.appendChild(t)}
 function coFormUrl(){return 'https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform?entry.1870397294='+encodeURIComponent(coOrderText())}
-$('checkout-btn').addEventListener('click',function(){if(!cart.length)return;var f=document.createElement('form');f.method='GET';f.action='https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform';var i=document.createElement('input');i.type='hidden';i.name='entry.1870397294';i.value=coOrderText();f.appendChild(i);document.body.appendChild(f);f.submit()});
+function coDeliveryMode(){var v=document.querySelector('input[data-delivery-opt]:checked');return v&&v.value.indexOf('deliver')>=0}
+function syncCoFields(){var del=coDeliveryMode();$('co-delivery-fields').hidden=!del;$('co-pickup-fields').hidden=del}
+function coValidate(){var ok=true,del=coDeliveryMode();function check(id,test){var f=document.querySelector('.co-field[data-req="'+id+'"]');if(!f)return true;var el=f.querySelector('input,select,textarea');var valid=test(el.value.trim());f.classList.toggle('invalid',!valid);if(!valid)ok=false;return valid}
+check('name',function(v){return v.length>1});check('phone',function(v){return v.replace(/\D/g,'').length>=7});
+if(del){check('address',function(v){return v.length>3});check('town',function(v){return v.length>0})}else{document.querySelectorAll('#co-delivery-fields .co-field.invalid').forEach(function(f){f.classList.remove('invalid')})}
+return ok}
+function coPrefillAndGo(){if(!coValidate()){var bad=document.querySelector('#checkout-view .co-field.invalid input, #checkout-view .co-field.invalid select');if(bad)bad.focus();return}
+var del=coDeliveryMode(),phone=$('co-phone').value.trim();
+var params={'entry.1870397294':coOrderText(),'entry.1240966703':$('co-name').value.trim(),'entry.1447863888':phone,'entry.19349020':phone,'entry.395943657':document.querySelector('input[data-delivery-opt]:checked').value,'entry.816092282':$('co-notes').value.trim()};
+if(del){params['entry.1174725512']=$('co-address').value.trim();params['entry.1539613161']=$('co-town').value;var dd=$('co-delivery-date').value;if(dd)params['entry.275909592']=dd;var tw=document.querySelector('input[name="co-timewin"]:checked');if(tw)params['entry.161086230']=tw.value}else{var pd=$('co-pickup-date').value;if(pd)params['entry.1102704386']=pd}
+var f=document.createElement('form');f.method='GET';f.action='https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform';Object.keys(params).forEach(function(k){if(!params[k])return;var i=document.createElement('input');i.type='hidden';i.name=k;i.value=params[k];f.appendChild(i)});document.body.appendChild(f);f.submit()}
+$('checkout-btn').addEventListener('click',function(){if(!cart.length)return;renderCoLines();syncCoFields();showView('checkout')});
+$('co-continue').addEventListener('click',coPrefillAndGo);
+document.querySelectorAll('input[data-delivery-opt]').forEach(function(r){r.addEventListener('change',syncCoFields)});
 $('co-back').addEventListener('click',function(){showView('cart')});
 $('thanks-close').addEventListener('click',function(){closeCart();showView('cart')});
 var _renderCart=renderCart;renderCart=function(){_renderCart();var empty=count()===0;$('checkout-btn').style.display=empty?'none':'';document.querySelector('.call-alt').style.display=empty?'none':''};
