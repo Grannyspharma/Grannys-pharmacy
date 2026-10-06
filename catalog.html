@@ -1172,8 +1172,8 @@
           <div class="co-field">
             <label>Pickup or delivery? <span class="req">*</span></label>
             <div class="co-radio-row">
-              <label class="co-radio"><input type="radio" data-delivery-opt name="co-fulfillment" value="No, I'll pick up at 5624 Merrick Road, Massapequa" checked> Pickup</label>
-              <label class="co-radio"><input type="radio" data-delivery-opt name="co-fulfillment" value="Yes, please deliver"> Delivery</label>
+              <label class="co-radio"><input type="radio" data-delivery-opt name="co-fulfillment" value="In-Store Pickup" checked> Pickup</label>
+              <label class="co-radio"><input type="radio" data-delivery-opt name="co-fulfillment" value="Local Delivery"> Delivery</label>
             </div>
           </div>
           <div id="co-delivery-fields" hidden>
@@ -1217,8 +1217,8 @@
           <div class="co-field">
             <label>Would you like to add anything else to order?</label>
             <div class="co-check-grid">
-              <label class="co-check"><input type="checkbox" name="co-addon" value="Hi-Float for Latex"> Hi-Float for Latex</label>
-              <label class="co-check"><input type="checkbox" name="co-addon" value="Balloon Weight"> Balloon Weight</label>
+              <label class="co-check"><input type="checkbox" name="co-addon" value="Hi-Float for Latex (+$1.00 per balloon)"> Hi-Float for Latex (+$1.00/balloon)</label>
+              <label class="co-check"><input type="checkbox" name="co-addon" value="Balloon Weight (+$1.49 each)"> Balloon Weight (+$1.49 each)</label>
             </div>
           </div>
           <div class="co-field">
@@ -1324,7 +1324,7 @@ function closeCart(){overlay.classList.remove('open');overlay.setAttribute('aria
 $('filter-toggle').addEventListener('click',function(){var expanded=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!expanded));$('catalog-filters').classList.toggle('open',!expanded)});$('catalog-search').addEventListener('input',function(){query=this.value.trim().toLowerCase();renderProducts()});document.querySelectorAll('.filter-chip').forEach(function(b){b.addEventListener('click',function(){activeCategory=b.dataset.category;document.querySelectorAll('.filter-chip').forEach(function(x){x.classList.toggle('active',x===b)});renderProducts();if(window.matchMedia('(max-width: 680px)').matches){$('catalog-filters').classList.remove('open');$('filter-toggle').setAttribute('aria-expanded','false')}})});document.querySelectorAll('.js-open-cart').forEach(function(b){b.addEventListener('click',openCart)});function coOrderText(){return cart.map(function(item){var opts=optionSummary(item.options);return item.qty+' x '+item.product.name+(opts?' -- '+opts:'')+(item.invoiceSku?' (SKU '+item.invoiceSku+')':'')+' -- '+money(item.unit)+' each'}).join('\n')+'\nEstimated subtotal: '+money(total())}
 function renderCoLines(){var box=$('co-order-lines');box.textContent='';cart.forEach(function(item){var d=document.createElement('div');var l=document.createElement('span');l.textContent=item.qty+' x '+itemDisplayName(item);var r=document.createElement('span');r.textContent=money(item.qty*item.unit);d.append(l,r);box.appendChild(d)});var t=document.createElement('div');t.className='co-total';var lt=document.createElement('span');lt.textContent='Estimated subtotal';var rt=document.createElement('span');rt.textContent=money(total());t.append(lt,rt);box.appendChild(t)}
 function coFormUrl(){return 'https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform?entry.1870397294='+encodeURIComponent(coOrderText())}
-function coDeliveryMode(){var v=document.querySelector('input[data-delivery-opt]:checked');return v&&v.value.indexOf('deliver')>=0}
+function coDeliveryMode(){var v=document.querySelector('input[data-delivery-opt]:checked');return v&&v.value.toLowerCase().indexOf('deliver')>=0}
 function syncCoFields(){var del=coDeliveryMode();$('co-delivery-fields').hidden=!del;$('co-pickup-fields').hidden=del}
 function initAddressAutocomplete(){if(!window.google||!google.maps||!google.maps.places)return;var input=$('co-address');if(!input||input.dataset.autocompleteInit)return;input.dataset.autocompleteInit='1';var ac=new google.maps.places.Autocomplete(input,{types:['address'],componentRestrictions:{country:'us'}});ac.setFields(['formatted_address']);ac.addListener('place_changed',function(){var place=ac.getPlace();if(place&&place.formatted_address)input.value=place.formatted_address})}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAddressAutocomplete)}else{initAddressAutocomplete()}
