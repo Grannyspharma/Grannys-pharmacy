@@ -1010,6 +1010,8 @@
     }
   </style>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOw49PWh5W-VHp3Z83wRO2hpa88ACBoTM&libraries=places"></script>
+<script>window.gm_authFailure=function(){var d=document.createElement('div');d.style.cssText='position:fixed;top:10px;left:10px;right:10px;background:#ffebee;color:#c62828;padding:12px;border-radius:8px;z-index:99999;font-size:14px';d.textContent='Maps auth failed. Please screenshot this and send to support.';document.body.appendChild(d)};
+(function(){var origErr=console.error;console.error=function(){var msg=Array.prototype.slice.call(arguments).join(' ');if(msg.indexOf('Google Maps JavaScript API error')>=0){var d=document.createElement('div');d.style.cssText='position:fixed;bottom:10px;left:10px;right:10px;background:#fff3e0;color:#e65100;padding:12px;border-radius:8px;z-index:99999;font-size:13px;word-break:break-all';d.textContent='MAPS ERROR: '+msg;document.body.appendChild(d)};origErr.apply(console,arguments)}})();</script>
 </head>
 <body>
   <header class="hero">
