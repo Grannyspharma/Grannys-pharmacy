@@ -1312,6 +1312,7 @@ var del=coDeliveryMode(),phone=$('co-phone').value.trim();
 var params={'entry.1870397294':coOrderText(),'entry.1240966703':$('co-name').value.trim(),'entry.1447863888':phone,'entry.19349020':phone,'entry.395943657':document.querySelector('input[data-delivery-opt]:checked').value,'entry.816092282':$('co-notes').value.trim()};
 if(del){params['entry.1174725512']=$('co-address').value.trim();params['entry.1539613161']=$('co-town').value;var dd=$('co-delivery-date').value;if(dd)params['entry.275909592']=dd;var tw=document.querySelector('input[name="co-timewin"]:checked');if(tw)params['entry.161086230']=tw.value}else{var pd=$('co-pickup-date').value;if(pd)params['entry.1102704386']=pd}
 var f=document.createElement('form');f.method='GET';f.action='https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform';Object.keys(params).forEach(function(k){if(!params[k])return;var i=document.createElement('input');i.type='hidden';i.name=k;i.value=params[k];f.appendChild(i)});document.body.appendChild(f);f.submit()}
+function showView(which){$('cart-view').hidden=which!=='cart';$('checkout-view').hidden=which!=='checkout';$('thanks-view').hidden=which!=='thanks'}
 $('checkout-btn').addEventListener('click',function(){if(!cart.length)return;renderCoLines();syncCoFields();showView('checkout')});
 $('co-continue').addEventListener('click',coPrefillAndGo);
 document.querySelectorAll('input[data-delivery-opt]').forEach(function(r){r.addEventListener('change',syncCoFields)});
