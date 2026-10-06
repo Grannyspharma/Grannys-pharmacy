@@ -1173,19 +1173,6 @@
               <input type="text" id="co-address" autocomplete="street-address">
               <span class="co-err">Please enter your street address.</span>
             </div>
-            <div class="co-field" data-req="town">
-              <label for="co-town">Town <span class="req">*</span></label>
-              <select id="co-town">
-                <option value="">Choose a town…</option>
-                <option>Massapequa</option>
-                <option>Massapequa Park</option>
-                <option>East Massapequa</option>
-                <option>Amityville</option>
-                <option>Amityville Harbor</option>
-                <option>Other (Team Member will call to confirm)</option>
-              </select>
-              <span class="co-err">Please choose your town.</span>
-            </div>
             <div class="co-field">
               <label for="co-delivery-date">Preferred delivery date</label>
               <input type="date" id="co-delivery-date">
@@ -1332,7 +1319,7 @@ function coDeliveryMode(){var v=document.querySelector('input[data-delivery-opt]
 function syncCoFields(){var del=coDeliveryMode();$('co-delivery-fields').hidden=!del;$('co-pickup-fields').hidden=del}
 function coValidate(){var ok=true,del=coDeliveryMode();function check(id,test){var f=document.querySelector('.co-field[data-req="'+id+'"]');if(!f)return true;var el=f.querySelector('input,select,textarea');var valid=test(el.value.trim());f.classList.toggle('invalid',!valid);if(!valid)ok=false;return valid}
 check('name',function(v){return v.length>1});check('phone',function(v){return v.replace(/\D/g,'').length>=7});
-if(del){check('address',function(v){return v.length>3});check('town',function(v){return v.length>0})}else{document.querySelectorAll('#co-delivery-fields .co-field.invalid').forEach(function(f){f.classList.remove('invalid')})}
+if(del){check('address',function(v){return v.length>3})}else{document.querySelectorAll('#co-delivery-fields .co-field.invalid').forEach(function(f){f.classList.remove('invalid')})}
 return ok}
 function coPrefillAndGo(){if(!coValidate()){var bad=document.querySelector('#checkout-view .co-field.invalid input, #checkout-view .co-field.invalid select');if(bad)bad.focus();return}
 var del=coDeliveryMode(),phone=$('co-phone').value.trim();
@@ -1343,7 +1330,7 @@ if(occasions.length)orderText+='\nOccasion/Theme: '+occasions.join(', ');
 if(addons.length)orderText+='\nAdd-ons: '+addons.join(', ');
 if(notes)orderText+='\nNotes: '+notes;
 var params={'entry.1870397294':orderText,'entry.1240966703':$('co-name').value.trim(),'entry.1447863888':phone,'entry.395943657':document.querySelector('input[data-delivery-opt]:checked').value};
-if(del){var addr=$('co-address').value.trim(),town=$('co-town').value;params['entry.1174725512']=town?addr+', '+town:addr;var dd=$('co-delivery-date').value;if(dd)params['entry.275909592']=dd;var tw=document.querySelector('input[name="co-timewin"]:checked');if(tw)params['entry.161086230']=tw.value}else{var pd=$('co-pickup-date').value;if(pd)params['entry.275909592']=pd}
+if(del){params['entry.1174725512']=$('co-address').value.trim();var dd=$('co-delivery-date').value;if(dd)params['entry.275909592']=dd;var tw=document.querySelector('input[name="co-timewin"]:checked');if(tw)params['entry.161086230']=tw.value}else{var pd=$('co-pickup-date').value;if(pd)params['entry.275909592']=pd}
 var f=document.createElement('form');f.method='GET';f.action='https://docs.google.com/forms/d/e/1FAIpQLSfTWmNsgn63UamSmExK71NSDaym4609K8KaVnNj_0R-WLvKhw/viewform';Object.keys(params).forEach(function(k){if(!params[k])return;var i=document.createElement('input');i.type='hidden';i.name=k;i.value=params[k];f.appendChild(i)});document.body.appendChild(f);f.submit()}
 function showView(which){$('cart-view').hidden=which!=='cart';$('checkout-view').hidden=which!=='checkout';$('thanks-view').hidden=which!=='thanks'}
 $('checkout-btn').addEventListener('click',function(){if(!cart.length)return;renderCoLines();syncCoFields();showView('checkout')});
