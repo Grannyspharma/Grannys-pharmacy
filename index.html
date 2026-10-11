@@ -33,12 +33,13 @@
   <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#F7F2E7" />
   <link rel="icon" href="data:," />
   <title>Granny's Pharmacy</title>
   <meta name="description" content="Fast prescription fills, easy transfers, free local delivery, balloons and more at Granny's Pharmacy in Massapequa, NY." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,650;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light dark;
@@ -152,6 +153,8 @@
     .button-secondary:hover { background: var(--ink); color: var(--paper); }
     .hero-art { height: 100%; min-height: 520px; }
     .hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-logo { display: flex; align-items: center; justify-content: center; min-height: 520px; background: transparent; }
+    .hero-logo img { width: min(380px, 80%); height: auto; aspect-ratio: 1/1; object-fit: cover; border-radius: 50%; box-shadow: 0 8px 32px rgba(59,42,30,.12); }
     .quick-links { padding: 28px 0 76px; }
     .link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .link-card {
@@ -283,12 +286,95 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
     }
+
+    /* Apothecary theme — warm cream, sage, and terracotta (matches catalog-v2) */
+    :root {
+      color-scheme: light;
+      --ink: #3B2A1E;
+      --ink-soft: #5C4A3A;
+      --paper: #F7F2E7;
+      --surface: #FFFFFF;
+      --surface-2: #FEFCF8;
+      --line: #E8DDD0;
+      --accent: #8F9E8B;
+      --accent-hover: #7A8A76;
+      --blue: #8F9E8B;
+      --blue-dark: #5F6E5B;
+      --gold: #C4744E;
+      --green: #8F9E8B;
+      --shadow: 0 10px 30px rgba(59, 42, 30, .08);
+      --radius-lg: 14px;
+      --radius-md: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #3B2A1E;
+        --ink-soft: #5C4A3A;
+        --paper: #F7F2E7;
+        --surface: #FFFFFF;
+        --surface-2: #FEFCF8;
+        --line: #E8DDD0;
+        --accent: #8F9E8B;
+        --accent-hover: #7A8A76;
+        --blue: #8F9E8B;
+        --blue-dark: #5F6E5B;
+        --gold: #C4744E;
+        --green: #8F9E8B;
+        --shadow: 0 10px 30px rgba(59, 42, 30, .08);
+      }
+    }
+    body { background: var(--paper); color: var(--ink); font-family: "DM Sans", sans-serif; }
+    h1, h2, h3 { font-family: "Playfair Display", Georgia, "Times New Roman", serif; letter-spacing: 0; }
+    .benefit-banner { background: var(--accent); color: #fff; }
+    .utility { background: var(--ink); }
+    @media (prefers-color-scheme: dark) { .utility { background: var(--ink); } }
+    .utility a:focus-visible { outline-color: var(--gold); }
+    .hero-shell { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .hero-eyebrow { color: var(--gold); font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .brand-logo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; box-shadow: var(--shadow); }
+    .hero-location { color: var(--blue-dark); }
+    .button { border-radius: 10px; font-family: "DM Sans", sans-serif; }
+    .button:hover { transform: translateY(-2px); }
+    .button:focus-visible, .link-card:focus-visible, .contact-link:focus-visible { outline-color: var(--gold); }
+    .button-primary { background: var(--accent); color: #fff; }
+    .button-primary:hover { background: var(--accent-hover); }
+    .button-secondary { border-color: var(--line); color: var(--ink); background: var(--surface); }
+    .button-secondary:hover { background: var(--surface-2); color: var(--ink); border-color: var(--accent); }
+    .link-card { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .link-card:first-child { border-radius: 14px; }
+    .link-card:nth-child(2) { border-radius: 14px; }
+    .link-card:last-child { border-radius: 14px; }
+    .link-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(59, 42, 30, .12); border-color: var(--accent); }
+    .number { background: #E9ECE5; color: #5F6E5B; }
+    .link-card .arrow { color: var(--gold); }
+    .catalog-status { background: var(--gold); color: #fff; animation: none; }
+    .section-tint { background: var(--surface-2); border-block: 1px solid var(--line); }
+    .promise { background: var(--surface); }
+    .promise strong { color: var(--gold); font-family: "Playfair Display", Georgia, serif; }
+    .service svg { color: var(--gold); }
+    .coming-soon, .coming-soon-inline { background: var(--gold); color: #fff; }
+    .visit-main { background: var(--ink); color: #F7F2E7; }
+    @media (prefers-color-scheme: dark) { .visit-main { background: var(--ink); } }
+    .visit-main > p { color: #D8CFC0; }
+    .contact-link { border-color: rgba(247,242,231,.5); color: #F7F2E7; }
+    .contact-link:hover { background: rgba(247,242,231,.1); border-color: #F7F2E7; }
+    .copy-contact { border-color: rgba(247,242,231,.4); color: #F7F2E7; font-family: "DM Sans", sans-serif; }
+    .copy-contact:hover { background: rgba(247,242,231,.1); }
+    .copy-contact:focus-visible { outline-color: var(--gold); }
+    .copy-status { color: #D8CFC0; }
+    .hours { background: var(--surface); border: 1px solid var(--line); color: var(--ink); box-shadow: var(--shadow); }
+    .hours dd { color: var(--ink-soft); }
+    footer { background: var(--surface-2); border-top: 1px solid var(--line); }
+    .footer-line { color: var(--ink-soft); }
+    @media (max-width: 820px) {
+      .link-card:first-child, .link-card:nth-child(2), .link-card:last-child { border-radius: 12px; }
+    }
   </style>
 </head>
 <body>
   <div class="benefit-banner" role="status">
     <div class="wrap">
-      <p>Front Store Now Open! We accept FSA/HSA, S3, OTC Network (coming soon), &amp; NationsBenefits.</p>
+      <p>Front Store Now Open! We accept FSA/HSA, S3, OTC Network &amp; NationsBenefits.</p>
     </div>
   </div>
 
@@ -310,8 +396,8 @@
             <a class="button button-primary" href="tel:+15169605201" target="_blank" rel="noopener" aria-label="Call Granny's Pharmacy at (516) 960-5201">Call the pharmacy</a>
           </div>
         </div>
-        <div class="hero-art">
-          <img src="images/landing-001.webp" alt="Illustration of a neighborhood pharmacy counter with medicine bottles, greeting cards, and colorful balloons" width="2736" height="912" />
+        <div class="hero-art hero-logo">
+          <img src="images/grannys-logo.png" alt="Granny's Pharmacy logo — Caring for you like family, Est. 2026" width="600" height="600" />
         </div>
       </div>
     </section>
@@ -331,7 +417,7 @@
         <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Granny%27s+Pharmacy+5624+Merrick+Road+Massapequa+NY+11758" target="_blank" rel="noopener noreferrer" aria-label="Get directions to our front store">
           <span class="number">03</span><span class="catalog-status">NOW OPEN</span><span class="arrow" aria-hidden="true">↗</span>
           <h2>Shop Our Front Store</h2>
-          <p>Shop OTC essentials, greeting cards (coming soon), and more — right here in Massapequa.</p>
+          <p>Shop OTC essentials, greeting cards (coming soon), and more — right here in Massapequa. We accept FSA/HSA, S3, OTC Network &amp; NationsBenefits.</p>
         </a>
       </div>
     </section>
