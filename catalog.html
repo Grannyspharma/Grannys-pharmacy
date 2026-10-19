@@ -1166,6 +1166,7 @@
 
           <button class="order-submit checkout-btn" id="checkout-btn" type="button">Checkout</button>
           <span class="call-alt">or <a href="tel:+15169605201" aria-label="Call Granny's Pharmacy at (516) 960-5201">call (516) 960-5201</a></span>
+          <button type="button" class="co-shop-tile" id="cart-shop-tile">🛍 Continue shopping — return to the catalog</button>
         </div>
 
         <div id="checkout-view" class="checkout-view" hidden>
@@ -1325,7 +1326,7 @@ function showView(which){$('cart-view').hidden=which!=='cart';$('checkout-view')
 $('checkout-btn').addEventListener('click',function(){if(!cart.length)return;renderCoLines();syncCoFields();showView('checkout')});
 $('co-continue').addEventListener('click',coPrefillAndGo);
 document.querySelectorAll('input[data-delivery-opt]').forEach(function(r){r.addEventListener('change',syncCoFields)});
-$('co-back').addEventListener('click',function(){showView('cart')});$('co-shop-tile').addEventListener('click',function(){closeCart()});(function(){var t=new Date().toLocaleDateString('en-CA');var pd=$('co-pickup-date'),dd=$('co-delivery-date');if(pd)pd.min=t;if(dd)dd.min=t})();
+$('co-back').addEventListener('click',function(){showView('cart')});$('co-shop-tile').addEventListener('click',function(){closeCart()});$('cart-shop-tile').addEventListener('click',function(){closeCart()});(function(){var t=new Date().toLocaleDateString('en-CA');var pd=$('co-pickup-date'),dd=$('co-delivery-date');if(pd)pd.min=t;if(dd)dd.min=t})();
 $('thanks-close').addEventListener('click',function(){closeCart();showView('cart')});
 var _renderCart=renderCart;renderCart=function(){_renderCart();var empty=count()===0;$('checkout-btn').style.display=empty?'none':'';document.querySelector('.call-alt').style.display=empty?'none':''};
 document.querySelector('.cart-close').addEventListener('click',function(){closeCart();showView('cart')});overlay.addEventListener('click',function(e){if(e.target===overlay){closeCart();showView('cart')}});document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();showView('cart')}});renderProducts();renderCart();
